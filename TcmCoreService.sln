@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcmCoreService", "TcmCoreService\TcmCoreService.csproj", "{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcmCoreService.Test", "TcmCoreService.Test\TcmCoreService.Test.csproj", "{66CC06DE-63DE-4CED-9D54-BE0560B989AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CC06DE-63DE-4CED-9D54-BE0560B989AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CC06DE-63DE-4CED-9D54-BE0560B989AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CC06DE-63DE-4CED-9D54-BE0560B989AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CC06DE-63DE-4CED-9D54-BE0560B989AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

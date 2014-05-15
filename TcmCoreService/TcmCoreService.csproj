@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TcmCoreService</RootNamespace>
+    <AssemblyName>TcmCoreService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tridion.ContentManager.CoreService.Client">
+      <HintPath>..\dependencies\Tridion.ContentManager.CoreService.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AudienceManagement\TargetGroup.cs" />
+    <Compile Include="CommunicationManagement\ComponentTemplate.cs" />
+    <Compile Include="CommunicationManagement\Page.cs" />
+    <Compile Include="CommunicationManagement\PageTemplate.cs" />
+    <Compile Include="CommunicationManagement\Publication.cs" />
+    <Compile Include="CommunicationManagement\PublicationTarget.cs" />
+    <Compile Include="CommunicationManagement\PublishingTarget.cs" />
+    <Compile Include="CommunicationManagement\StructureGroup.cs" />
+    <Compile Include="CommunicationManagement\TargetType.cs" />
+    <Compile Include="CommunicationManagement\Template.cs" />
+    <Compile Include="CommunicationManagement\TemplateBuildingBlock.cs" />
+    <Compile Include="Configuration\ClientConfiguration.cs" />
+    <Compile Include="ContentManagement\BluePrintNode.cs" />
+    <Compile Include="ContentManagement\Category.cs" />
+    <Compile Include="ContentManagement\Component.cs" />
+    <Compile Include="ContentManagement\Folder.cs" />
+    <Compile Include="ContentManagement\IdentifiableObject.cs" />
+    <Compile Include="ContentManagement\Keyword.cs" />
+    <Compile Include="ContentManagement\MultimediaType.cs" />
+    <Compile Include="ContentManagement\OrganizationalItem.cs" />
+    <Compile Include="ContentManagement\Repository.cs" />
+    <Compile Include="ContentManagement\RepositoryLocalObject.cs" />
+    <Compile Include="ContentManagement\Schema.cs" />
+    <Compile Include="ContentManagement\SystemWideObject.cs" />
+    <Compile Include="ContentManagement\VersionedItem.cs" />
+    <Compile Include="ContentManagement\VirtualFolder.cs" />
+    <Compile Include="Info\AccessControlEntry.cs" />
+    <Compile Include="Info\AccessControlList.cs" />
+    <Compile Include="Info\BinaryContent.cs" />
+    <Compile Include="Info\BluePrint.cs" />
+    <Compile Include="Info\ComponentPresentation.cs" />
+    <Compile Include="Info\Info.cs" />
+    <Compile Include="Info\Location.cs" />
+    <Compile Include="Info\TargetDestination.cs" />
+    <Compile Include="Info\TargetGroupCondition.cs" />
+    <Compile Include="Info\Workflow.cs" />
+    <Compile Include="Interfaces\IWorkflowItem.cs" />
+    <Compile Include="Misc\TemplatePriority.cs" />
+    <Compile Include="Publishing\PublishTransaction.cs" />
+    <Compile Include="Security\Group.cs" />
+    <Compile Include="Security\Trustee.cs" />
+    <Compile Include="Security\User.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="Configuration\ClientMode.cs" />
+    <Compile Include="Misc\TcmUri.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflow\Activity.cs" />
+    <Compile Include="Workflow\ActivityDefinition.cs" />
+    <Compile Include="Workflow\ActivityHistory.cs" />
+    <Compile Include="Workflow\ActivityInstance.cs" />
+    <Compile Include="Workflow\ApprovalStatus.cs" />
+    <Compile Include="Workflow\Process.cs" />
+    <Compile Include="Workflow\ProcessDefinition.cs" />
+    <Compile Include="Workflow\ProcessDefinitionAssociation.cs" />
+    <Compile Include="Workflow\ProcessHistory.cs" />
+    <Compile Include="Workflow\ProcessInstance.cs" />
+    <Compile Include="Workflow\TridionActivityDefinition.cs" />
+    <Compile Include="Workflow\TridionProcessDefinition.cs" />
+    <Compile Include="Workflow\WorkflowObject.cs" />
+    <Compile Include="Workflow\WorkItem.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

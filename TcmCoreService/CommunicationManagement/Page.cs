@@ -1,0 +1,241 @@
+﻿#region Header
+////////////////////////////////////////////////////////////////////////////////////
+//
+//	File Description: Page
+// ---------------------------------------------------------------------------------
+//	Date Created	: March 21, 2014
+//	Author			: Rob van Oostenrijk
+// ---------------------------------------------------------------------------------
+// 	Change History
+//	Date Modified       : 
+//	Changed By          : 
+//	Change Description  : 
+//
+////////////////////////////////////////////////////////////////////////////////////
+#endregion
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TcmCoreService.ContentManagement;
+using TcmCoreService.Info;
+using TcmCoreService.Interfaces;
+using TcmCoreService.Misc;
+using TcmCoreService.Workflow;
+using Tridion.ContentManager.CoreService.Client;
+
+namespace TcmCoreService.CommunicationManagement
+{
+	/// <summary>
+	/// <see cref="Page" /> wraps around <see cref="T:Tridion.ContentManager.CoreService.Client.PageData" />.
+	/// </summary>
+	public class Page : VersionedItem, IWorkflowItem
+	{
+		private PageData mPageData;
+
+		private ApprovalStatus mApprovalStatus = null;
+		private IEnumerable<ComponentPresentation> mComponentPresentations = null;
+		private PageTemplate mPageTemplate = null;
+		private Info.Workflow mWorkflow = null;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Page"/> class.
+		/// </summary>
+		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="pageData"><see cref="T:Tridion.ContentManager.CoreService.Client.PageData" /></param>
+		protected Page(Session session, PageData pageData): base(session, pageData)
+		{
+			if (pageData == null)
+				throw new ArgumentNullException("pageData");
+
+			mPageData = pageData;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Page"/> class.
+		/// </summary>
+		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
+		internal Page(Session session, TcmUri uri): this(session, session.Read<PageData>(uri))
+		{
+		}
+
+		/// <summary>
+		/// Reload the <see cref="Page" /> with the specified <see cref="T:Tridion.ContentManager.CoreService.Client.PageData" />
+		/// </summary>
+		/// <param name="pageData"><see cref="T:Tridion.ContentManager.CoreService.Client.PageData" /></param>
+		protected void Reload(PageData pageData)
+		{
+			if (pageData == null)
+				throw new ArgumentNullException("pageData");
+
+			mPageData = pageData;
+			base.Reload(pageData);
+
+			mApprovalStatus = null;
+			mComponentPresentations = null;
+			mPageTemplate = null;
+			mWorkflow = null;
+		}
+
+		/// <summary>
+		/// Reload the <see cref="Page" /> data from the Content Manager
+		/// </summary>
+		public override void Reload()
+		{
+			Reload(Session.Read<PageData>(this.Id));
+		}
+
+		/// <summary>
+		/// Localize this <see cref="Page" />
+		/// </summary>
+		public override void Localize()
+		{
+			Reload(Session.Localize<PageData>(this.Id));
+		}
+
+		/// <summary>
+		/// UnLocalize this <see cref="Page" />
+		/// </summary>
+		public override void UnLocalize()
+		{
+			Reload(Session.UnLocalize<PageData>(this.Id));
+
+		}
+
+		/// <summary>
+		/// Retrieves the <see cref="T:TcmCoreService.Workflow.ApprovalStatus" /> of this <see cref="Page" />
+		/// </summary>
+		/// <value>
+		/// <see cref="T:TcmCoreService.Workflow.ApprovalStatus" /> of this <see cref="Page" />
+		/// </value>
+		public ApprovalStatus ApprovalStatus
+		{
+			get
+			{
+				if (mApprovalStatus == null && mPageData.ApprovalStatus.IdRef != TcmUri.NullUri)
+					mApprovalStatus = new ApprovalStatus(Session, mPageData.ApprovalStatus.IdRef);
+
+				return mApprovalStatus;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.Info.ComponentPresentation" /> for this <see cref="Page" />
+		/// </summary>
+		/// <value>
+		/// <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.Info.ComponentPresentation" /> for this <see cref="Page" />
+		/// </value>
+		public IEnumerable<ComponentPresentation> ComponentPresentations
+		{
+			get
+			{
+				if (mComponentPresentations == null && mPageData.ComponentPresentations != null)
+					mComponentPresentations = mPageData.ComponentPresentations.Select(componentPresentation => new ComponentPresentation(Session, componentPresentation));
+
+				return mComponentPresentations;
+			}
+			set
+			{
+				mComponentPresentations = value;
+				
+				if (value != null)
+				{
+					mPageData.ComponentPresentations = mComponentPresentations.Select(componentPresentation => new ComponentPresentationData()
+					{
+						Component = new LinkToComponentData()
+						{
+							IdRef = componentPresentation.Component.Id
+						},
+						ComponentTemplate = new LinkToComponentTemplateData()
+						{
+							IdRef = componentPresentation.ComponentTemplate.Id
+						}
+					}).ToArray();
+				}
+				else
+					mPageData.ComponentPresentations = null;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the filename of this <see cref="Page" />
+		/// </summary>
+		/// <value>
+		/// Filename of this <see cref="Page" />
+		/// </value>
+		public String FileName
+		{
+			get
+			{
+				return mPageData.FileName;
+			}
+			set
+			{
+				if (!String.IsNullOrEmpty(value))
+					mPageData.FileName = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Page"/> is using an inherited <see cref="PageTemplate" />.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this <see cref="Page"/> is using an inherited <see cref="PageTemplate" />; otherwise, <c>false</c>.
+		/// </value>
+		public Boolean IsPageTemplateInherited
+		{
+			get
+			{
+				return mPageData.IsPageTemplateInherited.GetValueOrDefault(false);
+			}
+			set
+			{
+				mPageData.IsPageTemplateInherited = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets <see cref="PageTemplate" /> for this <see cref="Page" />
+		/// </summary>
+		/// <value>
+		/// <see cref="PageTemplate" /> for this <see cref="Page" />
+		/// </value>
+		public PageTemplate PageTemplate
+		{
+			get
+			{
+				if (mPageTemplate == null && mPageData.PageTemplate != null)
+					mPageTemplate = new PageTemplate(Session, mPageData.PageTemplate.IdRef);
+
+				return mPageTemplate;
+			}
+			set
+			{
+				mPageTemplate = value;
+
+				if (value == null)
+					mPageData.PageTemplate.IdRef = TcmUri.NullUri;
+				else
+					mPageData.PageTemplate.IdRef = mPageTemplate.Id;
+			}
+		}
+
+		/// <summary>
+		/// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="Page" />.
+		/// </summary>
+		/// <value>
+		/// <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="Page" />
+		/// </value>
+		public Info.Workflow Workflow
+		{
+			get
+			{
+				if (mWorkflow == null && mPageData.WorkflowInfo != null)
+					mWorkflow = new Info.Workflow(Session, mPageData.WorkflowInfo);
+
+				return mWorkflow;
+			}
+		}
+	}
+}
