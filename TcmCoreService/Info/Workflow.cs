@@ -37,9 +37,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Workflow" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="workflowInfo"><see cref="T:Tridion.ContentManager.CoreService.Client.WorkflowInfo" /></param>
-		internal Workflow(Session session, WorkflowInfo workflowInfo): base(session)
+		internal Workflow(Client client, WorkflowInfo workflowInfo): base(client)
 		{
 			mWorkflowInfo = workflowInfo;
 		}
@@ -83,7 +83,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mActivityInstance == null)
-					mActivityInstance = new ActivityInstance(Session, mWorkflowInfo.ActivityInstance.IdRef);
+					mActivityInstance = new ActivityInstance(Client, mWorkflowInfo.ActivityInstance.IdRef);
 
 				return mActivityInstance;
 			}
@@ -100,7 +100,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mProcessInstance == null)
-					mProcessInstance = new ProcessInstance(Session, mWorkflowInfo.ProcessInstance.IdRef);
+					mProcessInstance = new ProcessInstance(Client, mWorkflowInfo.ProcessInstance.IdRef);
 
 				return mProcessInstance;
 			}
@@ -131,7 +131,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mAssignee == null)
-					mAssignee = new User(Session, mWorkflowInfo.Assignee.IdRef);
+					mAssignee = new User(Client, mWorkflowInfo.Assignee.IdRef);
 
 				return mAssignee;
 			}
@@ -148,7 +148,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mPerformer == null)
-					mPerformer = new User(Session, mWorkflowInfo.Performer.IdRef);
+					mPerformer = new User(Client, mWorkflowInfo.Performer.IdRef);
 
 				return mPerformer;
 			}

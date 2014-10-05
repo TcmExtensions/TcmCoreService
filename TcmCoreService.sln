@@ -20,6 +20,9 @@ Global
 		{66CC06DE-63DE-4CED-9D54-BE0560B989AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CC06DE-63DE-4CED-9D54-BE0560B989AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = TcmCoreService.Test\TcmCoreService.Test.csproj
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

@@ -39,9 +39,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PublicationTarget"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="publicationTargetData"><see cref="T:Tridion.ContentManager.CoreService.Client.PublicationTargetData" /></param>
-		protected PublicationTarget(Session session, PublicationTargetData publicationTargetData): base(session, publicationTargetData)
+		protected PublicationTarget(Client client, PublicationTargetData publicationTargetData): base(client, publicationTargetData)
 		{
 			if (publicationTargetData == null)
 				throw new ArgumentNullException("publicationTargetData");
@@ -52,9 +52,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PublicationTarget"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal PublicationTarget(Session session, TcmUri uri): this(session, session.Read<PublicationTargetData>(uri))
+		internal PublicationTarget(Client client, TcmUri uri): this(client, client.Read<PublicationTargetData>(uri))
 		{
 		}
 
@@ -80,7 +80,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<PublicationTargetData>(this.Id));			
+			Reload(Client.Read<PublicationTargetData>(this.Id));			
 		}
 
 		/// <summary>
@@ -130,7 +130,7 @@ namespace TcmCoreService.CommunicationManagement
 			get			
 			{
 				if (mDestinations == null && mPublicationTargetData.Destinations != null)
-					mDestinations = mPublicationTargetData.Destinations.Select(destination => new TargetDestination(Session, destination));
+					mDestinations = mPublicationTargetData.Destinations.Select(destination => new TargetDestination(Client, destination));
 
 				return mDestinations;
 			}
@@ -166,7 +166,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mMinApprovalStatus == null && mPublicationTargetData.MinApprovalStatus.IdRef != TcmUri.NullUri)
-					mMinApprovalStatus = new ApprovalStatus(Session, mPublicationTargetData.MinApprovalStatus.IdRef);
+					mMinApprovalStatus = new ApprovalStatus(Client, mPublicationTargetData.MinApprovalStatus.IdRef);
 
 				return mMinApprovalStatus;
 			}
@@ -202,7 +202,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mPublications == null && mPublicationTargetData.Publications != null)
-					mPublications = mPublicationTargetData.Publications.Select(publication => new Publication(Session, publication.IdRef));
+					mPublications = mPublicationTargetData.Publications.Select(publication => new Publication(Client, publication.IdRef));
 
 				return mPublications;
 			}
@@ -251,7 +251,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mTargetTypes == null && mPublicationTargetData.TargetTypes != null)
-					mTargetTypes = mPublicationTargetData.TargetTypes.Select(targetType => new TargetType(Session, targetType.IdRef));
+					mTargetTypes = mPublicationTargetData.TargetTypes.Select(targetType => new TargetType(Client, targetType.IdRef));
 
 				return mTargetTypes;
 			}

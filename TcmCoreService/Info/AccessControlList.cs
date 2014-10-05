@@ -32,9 +32,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AccessControlList"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="bluePrintInfo"><see cref="T:Tridion.ContentManager.CoreService.Client.AccessControlListData" /></param>
-		public AccessControlList(Session session, AccessControlListData accessControlListData): base(session)
+		public AccessControlList(Client client, AccessControlListData accessControlListData): base(client)
 		{
 			mAccessControlListData = accessControlListData;			
 		}
@@ -50,7 +50,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mAccessControlEntries == null)
-					mAccessControlEntries = mAccessControlListData.AccessControlEntries.Select(entry => new AccessControlEntry(Session, entry));
+					mAccessControlEntries = mAccessControlListData.AccessControlEntries.Select(entry => new AccessControlEntry(Client, entry));
 
 				return mAccessControlEntries;
 			}

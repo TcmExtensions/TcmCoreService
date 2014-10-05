@@ -32,9 +32,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Repository"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="schemaData"><see cref="T:Tridion.ContentManager.CoreService.Client.RepositoryData" /></param>
-		protected Repository(Session session, RepositoryData repositoryData): base(session, repositoryData)
+		protected Repository(Client client, RepositoryData repositoryData): base(client, repositoryData)
 		{
 			if (repositoryData == null)
 				throw new ArgumentNullException("repositoryData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Repository"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Repository(Session session, TcmUri uri): this(session, session.Read<RepositoryData>(uri))
+		internal Repository(Client client, TcmUri uri): this(client, client.Read<RepositoryData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<RepositoryData>(this.Id));
+			Reload(Client.Read<RepositoryData>(this.Id));
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mRepositoryData.MetadataSchema.IdRef != TcmUri.NullUri)
-					return new Schema(Session, mRepositoryData.MetadataSchema.IdRef);
+					return new Schema(Client, mRepositoryData.MetadataSchema.IdRef);
 				else
 					return null;
 			}

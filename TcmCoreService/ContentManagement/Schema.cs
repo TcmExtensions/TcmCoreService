@@ -36,9 +36,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Schema"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="schemaData"><see cref="T:Tridion.ContentManager.CoreService.Client.SchemaData" /></param>
-		protected Schema(Session session, SchemaData schemaData): base(session, schemaData)
+		protected Schema(Client client, SchemaData schemaData): base(client, schemaData)
 		{
 			if (schemaData == null)
 				throw new ArgumentNullException("schemaData");
@@ -49,9 +49,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Schema"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Schema(Session session, TcmUri uri): this(session, session.Read<SchemaData>(uri))
+		internal Schema(Client client, TcmUri uri): this(client, client.Read<SchemaData>(uri))
 		{
 		}
 
@@ -76,7 +76,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<SchemaData>(this.Id));
+			Reload(Client.Read<SchemaData>(this.Id));
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<SchemaData>(this.Id));
+			Reload(Client.Localize<SchemaData>(this.Id));
 		}
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<SchemaData>(this.Id));			
+			Reload(Client.UnLocalize<SchemaData>(this.Id));			
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mAllowedMultimediaTypes == null && mSchemaData.AllowedMultimediaTypes != null)
-					mAllowedMultimediaTypes = mSchemaData.AllowedMultimediaTypes.Select(multimediaType => new MultimediaType(Session, multimediaType.IdRef));
+					mAllowedMultimediaTypes = mSchemaData.AllowedMultimediaTypes.Select(multimediaType => new MultimediaType(Client, multimediaType.IdRef));
 
 				return mAllowedMultimediaTypes;				
 			}
@@ -135,7 +135,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mComponentProcess == null && mSchemaData.ComponentProcess != null)
-					mComponentProcess = new TridionProcessDefinition(Session, mSchemaData.ComponentProcess.IdRef);
+					mComponentProcess = new TridionProcessDefinition(Client, mSchemaData.ComponentProcess.IdRef);
 
 				return mComponentProcess;
 			}

@@ -30,11 +30,11 @@ namespace TcmCoreService.Security
 		private UserData mUserData;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="User"/> class.
+		/// Initializes a new instance of the <see cref="User" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="userData"><see cref="T:Tridion.ContentManager.CoreService.Client.UserData" /></param>
-		protected User(Session session, UserData userData): base(session, userData)
+		protected User(Client client, UserData userData): base(client, userData)
 		{
 			if (userData == null)
 				throw new ArgumentNullException("userData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.Security
 		/// <summary>
 		/// Initializes a new instance of the <see cref="User"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal User(Session session, TcmUri uri): this(session, session.Read<UserData>(uri))
+		internal User(Client client, TcmUri uri): this(client, client.Read<UserData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.Security
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<UserData>(this.Id));
+			Reload(Client.Read<UserData>(this.Id));
 		}
 	}
 }

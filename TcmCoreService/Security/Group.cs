@@ -32,9 +32,9 @@ namespace TcmCoreService.Security
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Group"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="groupData"><see cref="T:Tridion.ContentManager.CoreService.Client.GroupData" /></param>
-		protected Group(Session session, GroupData groupData): base(session, groupData)
+		protected Group(Client client, GroupData groupData): base(client, groupData)
 		{
 			if (groupData == null)
 				throw new ArgumentNullException("groupData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.Security
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Group"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Group(Session session, TcmUri uri): this(session, session.Read<GroupData>(uri))
+		internal Group(Client client, TcmUri uri): this(client, client.Read<GroupData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.Security
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<GroupData>(this.Id));
+			Reload(Client.Read<GroupData>(this.Id));
 		}
 	}
 }

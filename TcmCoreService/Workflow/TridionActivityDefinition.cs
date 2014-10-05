@@ -32,9 +32,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TridionActivityDefinition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="tridionActivityDefinitionData"><see cref="T:Tridion.ContentManager.CoreService.Client.TridionActivityDefinitionData" /></param>
-		protected TridionActivityDefinition(Session session, TridionActivityDefinitionData tridionActivityDefinitionData): base(session, tridionActivityDefinitionData)
+		protected TridionActivityDefinition(Client client, TridionActivityDefinitionData tridionActivityDefinitionData): base(client, tridionActivityDefinitionData)
 		{
 			if (tridionActivityDefinitionData == null)
 				throw new ArgumentNullException("tridionActivityDefinitionData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TridionActivityDefinition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal TridionActivityDefinition(Session session, TcmUri uri): this(session, session.Read<TridionActivityDefinitionData>(uri))
+		internal TridionActivityDefinition(Client client, TcmUri uri): this(client, client.Read<TridionActivityDefinitionData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TridionActivityDefinitionData>(this.Id));
+			Reload(Client.Read<TridionActivityDefinitionData>(this.Id));
 		}
 	}
 }

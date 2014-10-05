@@ -34,9 +34,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="VirtualFolder"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="folderData"><see cref="T:Tridion.ContentManager.CoreService.Client.VirtualFolderData" /></param>
-		protected VirtualFolder(Session session, VirtualFolderData virtualFolderData): base(session, virtualFolderData)
+		protected VirtualFolder(Client client, VirtualFolderData virtualFolderData): base(client, virtualFolderData)
 		{
 			if (virtualFolderData == null)
 				throw new ArgumentNullException("virtualFolderData");
@@ -47,9 +47,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="VirtualFolder"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal VirtualFolder(Session session, TcmUri uri): this(session, session.Read<VirtualFolderData>(uri))
+		internal VirtualFolder(Client client, TcmUri uri): this(client, client.Read<VirtualFolderData>(uri))
 		{
 		}
 
@@ -73,7 +73,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<VirtualFolderData>(this.Id));
+			Reload(Client.Read<VirtualFolderData>(this.Id));
 		}
 
 		/// <summary>
@@ -81,7 +81,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<VirtualFolderData>(this.Id));
+			Reload(Client.Localize<VirtualFolderData>(this.Id));
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<VirtualFolderData>(this.Id));			
+			Reload(Client.UnLocalize<VirtualFolderData>(this.Id));			
 		}
 
 		/// <summary>
@@ -123,7 +123,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mTypeSchema == null && mVirtualFolderData.TypeSchema.IdRef != TcmUri.NullUri)
-					mTypeSchema = new Schema(Session, mVirtualFolderData.TypeSchema.IdRef);
+					mTypeSchema = new Schema(Client, mVirtualFolderData.TypeSchema.IdRef);
 
 				return mTypeSchema;
 			}

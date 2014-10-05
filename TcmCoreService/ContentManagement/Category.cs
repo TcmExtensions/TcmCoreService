@@ -34,9 +34,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Category"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="folderData"><see cref="T:Tridion.ContentManager.CoreService.Client.CategoryData" /></param>
-		protected Category(Session session, CategoryData categoryData): base(session, categoryData)
+		protected Category(Client client, CategoryData categoryData): base(client, categoryData)
 		{
 			if (categoryData == null)
 				throw new ArgumentNullException("categoryData");
@@ -47,9 +47,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Category"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Category(Session session, TcmUri uri): this(session, session.Read<CategoryData>(uri))
+		internal Category(Client client, TcmUri uri): this(client, client.Read<CategoryData>(uri))
 		{
 		}
 
@@ -74,7 +74,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<CategoryData>(this.Id));
+			Reload(Client.Read<CategoryData>(this.Id));
 		}
 
 		/// <summary>
@@ -82,7 +82,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<CategoryData>(this.Id));
+			Reload(Client.Localize<CategoryData>(this.Id));
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<CategoryData>(this.Id));			
+			Reload(Client.UnLocalize<CategoryData>(this.Id));			
 		}
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mAllowedParentCategories == null && mCategoryData.AllowedParentCategories != null)
-					mAllowedParentCategories = mCategoryData.AllowedParentCategories.Select(category => new Category(Session, category.IdRef));
+					mAllowedParentCategories = mCategoryData.AllowedParentCategories.Select(category => new Category(Client, category.IdRef));
 
 				return mAllowedParentCategories;
 			}
@@ -154,7 +154,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mKeywordMetadataSchema == null && mCategoryData.KeywordMetadataSchema.IdRef != TcmUri.NullUri)
-					mKeywordMetadataSchema = new Schema(Session, mCategoryData.KeywordMetadataSchema.IdRef);
+					mKeywordMetadataSchema = new Schema(Client, mCategoryData.KeywordMetadataSchema.IdRef);
 
 				return mKeywordMetadataSchema;
 			}

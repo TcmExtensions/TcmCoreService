@@ -44,9 +44,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Publication"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="publicationData"><see cref="T:Tridion.ContentManager.CoreService.Client.PublicationData" /></param>
-		protected Publication(Session session, PublicationData publicationData): base(session, publicationData)
+		protected Publication(Client client, PublicationData publicationData): base(client, publicationData)
 		{
 			if (publicationData == null)
 				throw new ArgumentNullException("publicationData");
@@ -57,9 +57,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Publication"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Publication(Session session, TcmUri uri): this(session, session.Read<PublicationData>(uri))
+		internal Publication(Client client, TcmUri uri): this(client, client.Read<PublicationData>(uri))
 		{
 		}
 
@@ -91,7 +91,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<PublicationData>(this.Id));			
+			Reload(Client.Read<PublicationData>(this.Id));			
 		}
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mComponentSnapshotTemplate == null && mPublicationData.ComponentSnapshotTemplate != null)
-					mComponentSnapshotTemplate = new ComponentTemplate(Session, mPublicationData.ComponentSnapshotTemplate.IdRef);
+					mComponentSnapshotTemplate = new ComponentTemplate(Client, mPublicationData.ComponentSnapshotTemplate.IdRef);
 
 				return mComponentSnapshotTemplate;
 			}
@@ -131,7 +131,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mComponentTemplateProcess == null && mPublicationData.ComponentTemplateProcess != null)
-					mComponentTemplateProcess = new TridionProcessDefinition(Session, mPublicationData.ComponentTemplateProcess.IdRef);
+					mComponentTemplateProcess = new TridionProcessDefinition(Client, mPublicationData.ComponentTemplateProcess.IdRef);
 
 				return mComponentTemplateProcess;
 			}
@@ -157,7 +157,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mDefaultComponentTemplate == null && mPublicationData.DefaultComponentTemplate != null)
-					mDefaultComponentTemplate = new ComponentTemplate(Session, mPublicationData.DefaultComponentTemplate.IdRef);
+					mDefaultComponentTemplate = new ComponentTemplate(Client, mPublicationData.DefaultComponentTemplate.IdRef);
 
 				return mDefaultComponentTemplate;
 			}
@@ -183,7 +183,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mDefaultMultimediaSchema == null && mPublicationData.DefaultMultimediaSchema != null)
-					mDefaultMultimediaSchema = new Schema(Session, mPublicationData.DefaultMultimediaSchema.IdRef);
+					mDefaultMultimediaSchema = new Schema(Client, mPublicationData.DefaultMultimediaSchema.IdRef);
 
 				return mDefaultMultimediaSchema;
 			}
@@ -209,7 +209,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mDefaultPageTemplate == null && mPublicationData.DefaultPageTemplate != null)
-					mDefaultPageTemplate = new PageTemplate(Session, mPublicationData.DefaultPageTemplate.IdRef);
+					mDefaultPageTemplate = new PageTemplate(Client, mPublicationData.DefaultPageTemplate.IdRef);
 
 				return mDefaultPageTemplate;
 			}
@@ -235,7 +235,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mDefaultTemplateBuildingBlock == null && mPublicationData.DefaultTemplateBuildingBlock != null)
-					mDefaultTemplateBuildingBlock = new TemplateBuildingBlock(Session, mPublicationData.DefaultTemplateBuildingBlock.IdRef);
+					mDefaultTemplateBuildingBlock = new TemplateBuildingBlock(Client, mPublicationData.DefaultTemplateBuildingBlock.IdRef);
 
 				return mDefaultTemplateBuildingBlock;
 			}
@@ -299,7 +299,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mPageSnapshotTemplate == null && mPublicationData.PageSnapshotTemplate != null)
-					mPageSnapshotTemplate = new PageTemplate(Session, mPublicationData.PageSnapshotTemplate.IdRef);
+					mPageSnapshotTemplate = new PageTemplate(Client, mPublicationData.PageSnapshotTemplate.IdRef);
 
 				return mPageSnapshotTemplate;
 			}
@@ -325,7 +325,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mPageTemplateProcess == null && mPublicationData.PageTemplateProcess != null)
-					mPageTemplateProcess = new TridionProcessDefinition(Session, mPublicationData.PageTemplateProcess.IdRef);
+					mPageTemplateProcess = new TridionProcessDefinition(Client, mPublicationData.PageTemplateProcess.IdRef);
 
 				return mPageTemplateProcess;
 			}
@@ -408,7 +408,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mRootStructureGroup == null && mPublicationData.RootStructureGroup != null)
-					mRootStructureGroup = new StructureGroup(Session, mPublicationData.RootStructureGroup.IdRef);
+					mRootStructureGroup = new StructureGroup(Client, mPublicationData.RootStructureGroup.IdRef);
 
 				return mRootStructureGroup;
 			}

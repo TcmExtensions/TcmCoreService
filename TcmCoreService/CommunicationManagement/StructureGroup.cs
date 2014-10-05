@@ -37,9 +37,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="StructureGroup"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="structureGroupData"><see cref="T:Tridion.ContentManager.CoreService.Client.StructureGroupData" /></param>
-		protected StructureGroup(Session session, StructureGroupData structureGroupData): base(session, structureGroupData)
+		protected StructureGroup(Client client, StructureGroupData structureGroupData): base(client, structureGroupData)
 		{
 			if (structureGroupData == null)
 				throw new ArgumentNullException("structureGroupData");
@@ -50,9 +50,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="StructureGroup"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal StructureGroup(Session session, TcmUri uri): this(session, session.Read<StructureGroupData>(uri))
+		internal StructureGroup(Client client, TcmUri uri): this(client, client.Read<StructureGroupData>(uri))
 		{
 		}
 
@@ -77,7 +77,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<StructureGroupData>(this.Id));
+			Reload(Client.Read<StructureGroupData>(this.Id));
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<StructureGroupData>(this.Id));
+			Reload(Client.Localize<StructureGroupData>(this.Id));
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<StructureGroupData>(this.Id));			
+			Reload(Client.UnLocalize<StructureGroupData>(this.Id));			
 		}
 
 		/// <summary>
@@ -107,7 +107,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mDefaultPageTemplate == null)
-					mDefaultPageTemplate = new PageTemplate(Session, mStructureGroupData.DefaultPageTemplate.IdRef);
+					mDefaultPageTemplate = new PageTemplate(Client, mStructureGroupData.DefaultPageTemplate.IdRef);
 
 				return mDefaultPageTemplate;
 			}
@@ -200,7 +200,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mPageProcess == null)
-					mPageProcess = new TridionProcessDefinition(Session, mStructureGroupData.PageProcess.IdRef);
+					mPageProcess = new TridionProcessDefinition(Client, mStructureGroupData.PageProcess.IdRef);
 
 				return mPageProcess;
 			}

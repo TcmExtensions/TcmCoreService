@@ -34,9 +34,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Keyword"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="keywordData"><see cref="T:Tridion.ContentManager.CoreService.Client.KeywordData" /></param>
-		protected Keyword(Session session, KeywordData keywordData): base(session, keywordData)
+		protected Keyword(Client client, KeywordData keywordData): base(client, keywordData)
 		{
 			if (keywordData == null)
 				throw new ArgumentNullException("keywordData");
@@ -47,9 +47,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Keyword"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Keyword(Session session, TcmUri uri): this(session, session.Read<KeywordData>(uri))
+		internal Keyword(Client client, TcmUri uri): this(client, client.Read<KeywordData>(uri))
 		{
 		}
 
@@ -74,7 +74,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<KeywordData>(this.Id));
+			Reload(Client.Read<KeywordData>(this.Id));
 		}
 
 		/// <summary>
@@ -82,7 +82,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<KeywordData>(this.Id));
+			Reload(Client.Localize<KeywordData>(this.Id));
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<KeywordData>(this.Id));			
+			Reload(Client.UnLocalize<KeywordData>(this.Id));			
 		}
 
 		/// <summary>
@@ -197,7 +197,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mParentKeywords == null && mKeywordData.ParentKeywords != null)
-					mParentKeywords = mKeywordData.ParentKeywords.Select(keyword => new Keyword(Session, keyword.IdRef));
+					mParentKeywords = mKeywordData.ParentKeywords.Select(keyword => new Keyword(Client, keyword.IdRef));
 
 				return mParentKeywords;
 			}
@@ -226,7 +226,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mRelatedKeywords == null)
-					mRelatedKeywords = mKeywordData.RelatedKeywords.Select(keyword => new Keyword(Session, keyword.IdRef));
+					mRelatedKeywords = mKeywordData.RelatedKeywords.Select(keyword => new Keyword(Client, keyword.IdRef));
 
 				return mRelatedKeywords;
 			}

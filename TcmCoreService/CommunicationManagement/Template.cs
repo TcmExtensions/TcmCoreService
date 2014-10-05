@@ -36,9 +36,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Template"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="templateData"><see cref="T:Tridion.ContentManager.CoreService.Client.TemplateData" /></param>
-		protected Template(Session session, TemplateData templateData): base(session, templateData)
+		protected Template(Client client, TemplateData templateData): base(client, templateData)
 		{
 			if (templateData == null)
 				throw new ArgumentNullException("templateData");
@@ -49,9 +49,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Template"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Template(Session session, TcmUri uri): this(session, session.Read<TemplateData>(uri))
+		internal Template(Client client, TcmUri uri): this(client, client.Read<TemplateData>(uri))
 		{
 		}
 
@@ -76,7 +76,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TemplateData>(this.Id));
+			Reload(Client.Read<TemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<TemplateData>(this.Id));
+			Reload(Client.Localize<TemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<TemplateData>(this.Id));
+			Reload(Client.UnLocalize<TemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mBinaryContent == null && mTemplateData.BinaryContent != null)
-					mBinaryContent = new BinaryContent(Session, mTemplateData.BinaryContent);
+					mBinaryContent = new BinaryContent(Client, mTemplateData.BinaryContent);
 
 				return mBinaryContent;
 			}
@@ -146,7 +146,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mParameterSchema == null && mTemplateData.ParameterSchema.IdRef != TcmUri.NullUri)
-					mParameterSchema = new Schema(Session, mTemplateData.ParameterSchema.IdRef);
+					mParameterSchema = new Schema(Client, mTemplateData.ParameterSchema.IdRef);
 
 				return mParameterSchema;
 			}

@@ -32,9 +32,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultimediaType"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="multimediaTypeData"><see cref="T:Tridion.ContentManager.CoreService.Client.MultimediaTypeData" /></param>
-		protected MultimediaType(Session session, MultimediaTypeData multimediaTypeData): base(session, multimediaTypeData)
+		protected MultimediaType(Client client, MultimediaTypeData multimediaTypeData): base(client, multimediaTypeData)
 		{
 			if (multimediaTypeData == null)
 				throw new ArgumentNullException("multimediaTypeData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MultimediaType"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal MultimediaType(Session session, TcmUri uri): this(session, session.Read<MultimediaTypeData>(uri))
+		internal MultimediaType(Client client, TcmUri uri): this(client, client.Read<MultimediaTypeData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<MultimediaTypeData>(this.Id));			
+			Reload(Client.Read<MultimediaTypeData>(this.Id));			
 		}
 
 		/// <summary>

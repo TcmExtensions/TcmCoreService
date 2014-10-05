@@ -55,7 +55,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<ProcessDefinitionAssociationData>(this.Id));
+			Reload(Client.Read<ProcessDefinitionAssociationData>(this.Id));
 		}
 	}
 }

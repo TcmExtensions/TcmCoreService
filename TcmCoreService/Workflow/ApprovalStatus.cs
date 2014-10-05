@@ -33,9 +33,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ApprovalStatus"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="activityData"><see cref="T:Tridion.ContentManager.CoreService.Client.ApprovalStatusData" /></param>
-		protected ApprovalStatus(Session session, ApprovalStatusData approvalStatusData): base(session, approvalStatusData)
+		protected ApprovalStatus(Client client, ApprovalStatusData approvalStatusData): base(client, approvalStatusData)
 		{
 			if (approvalStatusData == null)
 				throw new ArgumentNullException("approvalStatusData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ApprovalStatus"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal ApprovalStatus(Session session, TcmUri uri): this(session, session.Read<ApprovalStatusData>(uri))
+		internal ApprovalStatus(Client client, TcmUri uri): this(client, client.Read<ApprovalStatusData>(uri))
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<ApprovalStatusData>(this.Id));
+			Reload(Client.Read<ApprovalStatusData>(this.Id));
 		}
 	}
 }

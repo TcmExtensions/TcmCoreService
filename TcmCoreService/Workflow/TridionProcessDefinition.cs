@@ -32,9 +32,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TridionProcessDefinition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="tridionProcessDefinitionData"><see cref="T:Tridion.ContentManager.CoreService.Client.TridionProcessDefinitionData" /></param>
-		protected TridionProcessDefinition(Session session, TridionProcessDefinitionData tridionProcessDefinitionData): base(session, tridionProcessDefinitionData)
+		protected TridionProcessDefinition(Client client, TridionProcessDefinitionData tridionProcessDefinitionData): base(client, tridionProcessDefinitionData)
 		{
 			if (tridionProcessDefinitionData == null)
 				throw new ArgumentNullException("tridionProcessDefinitionData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TridionProcessDefinition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal TridionProcessDefinition(Session session, TcmUri uri): this(session, session.Read<TridionProcessDefinitionData>(uri))
+		internal TridionProcessDefinition(Client client, TcmUri uri): this(client, client.Read<TridionProcessDefinitionData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TridionProcessDefinitionData>(this.Id));
+			Reload(Client.Read<TridionProcessDefinitionData>(this.Id));
 		}
 
 
@@ -78,7 +78,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<TridionProcessDefinitionData>(this.Id));
+			Reload(Client.Localize<TridionProcessDefinitionData>(this.Id));
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<TridionProcessDefinitionData>(this.Id));
+			Reload(Client.UnLocalize<TridionProcessDefinitionData>(this.Id));
 		}
 	}
 }

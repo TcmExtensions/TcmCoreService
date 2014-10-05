@@ -27,46 +27,46 @@ namespace TcmCoreService.ContentManagement
 	/// </summary>
 	public abstract class IdentifiableObject
 	{
-		private Session mSession;
+		private Client mClient;
 		private IdentifiableObjectData mIdentifiableObjectData;
 
 		/// <summary>
-		/// Retrieves the associated <see cref="T:TcmCoreService.Session" /> of this <see cref="IdentifiableObject" />
+		/// Retrieves the associated <see cref="T:TcmCoreService.Client" /> of this <see cref="IdentifiableObject" />
 		/// </summary>
 		/// <value>
-		/// Associated <see cref="T:TcmCoreService.Session" /> of this <see cref="IdentifiableObject" />
+		/// Associated <see cref="T:TcmCoreService.Client" /> of this <see cref="IdentifiableObject" />
 		/// </value>
-		protected Session Session
+		protected Client Client
 		{
 			get
 			{
-				return mSession;
+				return mClient;
 			}
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="IdentifiableObject"/> class.
+		/// Initializes a new instance of the <see cref="IdentifiableObject" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="session"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="identifiableObjectData"><see cref="T:Tridion.ContentManager.CoreService.Client.IdentifiableObjectData" /></param>	
-		protected IdentifiableObject(Session session, IdentifiableObjectData identifiableObjectData)
+		protected IdentifiableObject(Client client, IdentifiableObjectData identifiableObjectData)
 		{
-			if (session == null)
-				throw new ArgumentNullException("session");
+			if (client == null)
+				throw new ArgumentNullException("client");
 			
 			if (identifiableObjectData == null)
 				throw new ArgumentNullException("identifiableObjectData");
 
-			mSession = session;
+			mClient = client;
 			mIdentifiableObjectData = identifiableObjectData;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="IdentifiableObject"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="session"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal IdentifiableObject(Session session, TcmUri uri): this(session, session.Read<IdentifiableObjectData>(uri))
+		internal IdentifiableObject(Client client, TcmUri uri): this(client, client.Read<IdentifiableObjectData>(uri))
 		{
 		}
 
@@ -87,7 +87,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public virtual void Reload()
 		{
-			Reload(Session.Read<RepositoryLocalObjectData>(this.Id));
+			Reload(Client.Read<RepositoryLocalObjectData>(this.Id));
 		}
 
 		/// <summary>
@@ -188,7 +188,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public void Delete()
 		{
-			mSession.Delete(this.Id);
+			mClient.Delete(this.Id);
 		}
 		
 		/// <summary>
@@ -201,7 +201,7 @@ namespace TcmCoreService.ContentManagement
 				//mIdentifiableObjectData = mSession.Create(mIdentifiableObjectData);
 			//else
 				// Update existing item
-				mSession.Save(mIdentifiableObjectData);
+				mClient.Save(mIdentifiableObjectData);
 		}
 
 		/// <summary>

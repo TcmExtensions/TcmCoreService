@@ -34,11 +34,11 @@ namespace TcmCoreService.ContentManagement
 		private User mRevisionUser = null;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="VersionedItem"/> class.
+		/// Initializes a new instance of the <see cref="VersionedItem" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="versionedItemData"><see cref="T:Tridion.ContentManager.CoreService.Client.VersionedItemData" /></param>
-		protected VersionedItem(Session session, VersionedItemData versionedItemData): base(session, versionedItemData)
+		protected VersionedItem(Client client, VersionedItemData versionedItemData): base(client, versionedItemData)
 		{
 			if (versionedItemData == null)
 				throw new ArgumentNullException("versionedItemData");
@@ -47,7 +47,7 @@ namespace TcmCoreService.ContentManagement
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="VersionedItem"/> class.
+		/// Initializes a new instance of the <see cref="VersionedItem" /> class.
 		/// </summary>
 		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
@@ -76,7 +76,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<VersionedItemData>(this.Id));
+			Reload(Client.Read<VersionedItemData>(this.Id));
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<VersionedItemData>(this.Id));
+			Reload(Client.Localize<VersionedItemData>(this.Id));
 		}
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<VersionedItemData>(this.Id));
+			Reload(Client.UnLocalize<VersionedItemData>(this.Id));
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mCheckOutUser == null)
-					mCheckOutUser = new User(Session, (mVersionedItemData.VersionInfo as FullVersionInfo).CheckOutUser.IdRef);
+					mCheckOutUser = new User(Client, (mVersionedItemData.VersionInfo as FullVersionInfo).CheckOutUser.IdRef);
 
 				return mCheckOutUser;
 			}
@@ -179,7 +179,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mRevisionUser == null)
-					mRevisionUser = new User(Session, (mVersionedItemData.VersionInfo as FullVersionInfo).Revisor.IdRef);
+					mRevisionUser = new User(Client, (mVersionedItemData.VersionInfo as FullVersionInfo).Revisor.IdRef);
 
 				return mRevisionUser;
 			}

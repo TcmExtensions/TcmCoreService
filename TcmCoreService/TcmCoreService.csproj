@@ -37,7 +37,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Tridion.ContentManager.CoreService.Client">
-      <HintPath>..\dependencies\Tridion.ContentManager.CoreService.Client.dll</HintPath>
+      <HintPath>..\..\References\SDL Tridion 2013\Tridion.ContentManager.CoreService.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +101,7 @@
     <Compile Include="Workflow\TridionProcessDefinition.cs" />
     <Compile Include="Workflow\WorkflowObject.cs" />
     <Compile Include="Workflow\WorkItem.cs" />
+    <Compile Include="Client.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,9 +33,9 @@ namespace TcmCoreService.Publishing
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PublishTransaction"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="publishTransactionData"><see cref="T:Tridion.ContentManager.CoreService.Client.PublishTransactionData" /></param>
-		private PublishTransaction(Session session, PublishTransactionData publishTransactionData): base(session, publishTransactionData)
+		private PublishTransaction(Client client, PublishTransactionData publishTransactionData): base(client, publishTransactionData)
 		{
 			if (publishTransactionData == null)
 				throw new ArgumentNullException("publishTransactionData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.Publishing
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PublishTransaction"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal PublishTransaction(Session session, TcmUri uri): this(session, session.Read<PublishTransactionData>(uri))
+		internal PublishTransaction(Client client, TcmUri uri): this(client, client.Read<PublishTransactionData>(uri))
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TcmCoreService.Publishing
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<PublishTransactionData>(this.Id));
+			Reload(Client.Read<PublishTransactionData>(this.Id));
 		}
 	}
 }

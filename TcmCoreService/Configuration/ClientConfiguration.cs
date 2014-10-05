@@ -26,27 +26,76 @@ namespace TcmCoreService.Configuration
 {
 	internal static class ClientConfiguration
 	{
-		private static WSHttpBinding mClientHttpBinding;
+		private static BasicHttpBinding mClientHttpBinding;
+		private static WSHttpBinding mClientWSHttpBinding;
 		private static NetTcpBinding mClientTcpBinding;
 
 		private static BasicHttpBinding mStreamHttpBinding;
 		private static NetTcpBinding mStreamTcpBinding;
 
-		internal static WSHttpBinding ClientHttpBinding
+		internal static bool IsRunningOnMono
 		{
 			get
+			{
+				return Type.GetType ("Mono.Runtime") != null;
+			}
+		}
+
+		internal static BasicHttpBinding ClientHttpBinding
+		{
+			get 
 			{
 				if (mClientHttpBinding == null)
 				{
 					try
 					{
-						// First try and load from a WSHttpBinding configuration named "ClientHttp".
-						mClientHttpBinding = new WSHttpBinding("ClientHttp");
+						// First try and load from a BasicHttpBinding configuration named "ClientHttp".
+						mClientHttpBinding = new BasicHttpBinding("ClientHttp");
 					}
 					catch
 					{
 						// Configuration is not available, create a binding directly
-						mClientHttpBinding = new WSHttpBinding()
+						mClientHttpBinding = new BasicHttpBinding()
+						{
+							AllowCookies = true,
+							BypassProxyOnLocal = false,
+							UseDefaultWebProxy = false,
+							MaxBufferPoolSize = 4 * 1048576, // 4 MB
+							MaxReceivedMessageSize = 4 * 1048576, // 4 MB
+							OpenTimeout = TimeSpan.FromMinutes(2), // 2 minutes
+							CloseTimeout = TimeSpan.FromMinutes(2), // 2 minutes
+							SendTimeout = TimeSpan.FromMinutes(10), // 10 minutes
+							ReceiveTimeout = TimeSpan.FromMinutes(10), // 10 minutes
+							ReaderQuotas = new XmlDictionaryReaderQuotas()
+							{
+								MaxStringContentLength = 4 * 1048576,
+								MaxArrayLength = 4 * 1048576
+							},
+						};
+					}
+				}
+
+				mClientHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+		
+				return mClientHttpBinding;
+			}
+		}
+
+		internal static WSHttpBinding ClientWSHttpBinding
+		{
+			get
+			{
+				if (mClientWSHttpBinding == null)
+				{
+					try
+					{
+						// First try and load from a WSHttpBinding configuration named "WSClientHttp".
+						mClientWSHttpBinding = new WSHttpBinding("WSClientHttp");
+					}
+					catch
+					{
+						// Configuration is not available, create a binding directly
+						mClientWSHttpBinding = new WSHttpBinding()
 						{
 							AllowCookies = true,
 							BypassProxyOnLocal = false,
@@ -63,19 +112,14 @@ namespace TcmCoreService.Configuration
 								MaxStringContentLength = 4 * 1048576,
 								MaxArrayLength = 4 * 1048576
 							},
-							Security = new WSHttpSecurity()
-							{
-								Mode = SecurityMode.Message,
-								Message =
-								{
-									ClientCredentialType = MessageCredentialType.Windows
-								}
-							}
 						};
 					}
 				}
 
-				return mClientHttpBinding;
+				mClientWSHttpBinding.Security.Mode = SecurityMode.Message;
+				mClientWSHttpBinding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
+
+				return mClientWSHttpBinding;
 			}
 		}
 
@@ -202,7 +246,18 @@ namespace TcmCoreService.Configuration
 			{
 				Scheme = "http",
 				Port = 80,
-				Path = "/webservices/CoreService2011.svc/wsHttp",
+				Path = "/webservices/CoreService2013.svc/basicHttp",
+				Host = targetUri.Host
+			}.Uri;
+		}
+
+		internal static Uri ClientWSHttpUri(Uri targetUri)
+		{
+			return new UriBuilder()
+			{
+				Scheme = "http",
+				Port = 80,
+				Path = "/webservices/CoreService2013.svc/wsHttp",
 				Host = targetUri.Host
 			}.Uri;
 		}
@@ -213,7 +268,7 @@ namespace TcmCoreService.Configuration
 			{
 				Scheme = "net.tcp",
 				Port = 2660,
-				Path = "/CoreService/2011/netTcp",
+				Path = "/CoreService/2013/netTcp",
 				Host = targetUri.Host
 			}.Uri;
 		}

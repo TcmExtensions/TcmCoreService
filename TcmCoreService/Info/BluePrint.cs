@@ -33,9 +33,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BluePrint"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="bluePrintInfo"><see cref="T:Tridion.ContentManager.CoreService.Client.BluePrintInfo" /></param>
-		public BluePrint(Session session, BluePrintInfo bluePrintInfo): base(session)
+		public BluePrint(Client client, BluePrintInfo bluePrintInfo): base(client)
 		{
 			mBluePrintInfo = bluePrintInfo;
 		}
@@ -51,7 +51,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mOwningRepository == null)
-					mOwningRepository = new Repository(Session, mBluePrintInfo.OwningRepository.IdRef);
+					mOwningRepository = new Repository(Client, mBluePrintInfo.OwningRepository.IdRef);
 
 				return mOwningRepository;
 			}

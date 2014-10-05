@@ -18,9 +18,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetGroupCondition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="targetGroupConditionData"><see cref="T:Tridion.ContentManager.CoreService.Client.TargetGroupConditionData" /></param>
-		internal TargetGroupCondition(Session session, TargetGroupConditionData targetGroupConditionData): base(session)
+		internal TargetGroupCondition(Client client, TargetGroupConditionData targetGroupConditionData): base(client)
 		{
 			mTargetGroupConditionData = targetGroupConditionData;			
 		}
@@ -36,7 +36,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mTargetGroup == null)
-					mTargetGroup = new TargetGroup(Session, mTargetGroupConditionData.TargetGroup.IdRef);
+					mTargetGroup = new TargetGroup(Client, mTargetGroupConditionData.TargetGroup.IdRef);
 
 				return mTargetGroup;
 			}

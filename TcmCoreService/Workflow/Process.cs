@@ -32,9 +32,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Process"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="processData"><see cref="T:Tridion.ContentManager.CoreService.Client.ProcessData" /></param>
-		protected Process(Session session, ProcessData processData): base(session, processData)
+		protected Process(Client client, ProcessData processData): base(client, processData)
 		{
 			if (processData == null)
 				throw new ArgumentNullException("processData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Process"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Process(Session session, TcmUri uri): this(session, session.Read<ProcessData>(uri))
+		internal Process(Client client, TcmUri uri): this(client, client.Read<ProcessData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<ProcessData>(this.Id));
+			Reload(Client.Read<ProcessData>(this.Id));
 		}
 	}
 }

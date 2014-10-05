@@ -35,9 +35,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="OrganizationalItem" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="folderData"><see cref="T:Tridion.ContentManager.CoreService.Client.OrganizationalItemData" /></param>
-		protected OrganizationalItem(Session session, OrganizationalItemData organizationalItemData): base(session, organizationalItemData)
+		protected OrganizationalItem(Client client, OrganizationalItemData organizationalItemData): base(client, organizationalItemData)
 		{
 			if (organizationalItemData == null)
 				throw new ArgumentNullException("organizationalItemData");
@@ -48,9 +48,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="OrganizationalItem" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal OrganizationalItem(Session session, TcmUri uri): this(session, session.Read<OrganizationalItemData>(uri))
+		internal OrganizationalItem(Client client, TcmUri uri): this(client, client.Read<OrganizationalItemData>(uri))
 		{
 		}
 
@@ -74,7 +74,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<OrganizationalItemData>(this.Id));
+			Reload(Client.Read<OrganizationalItemData>(this.Id));
 		}
 
 		/// <summary>
@@ -82,7 +82,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<OrganizationalItemData>(this.Id));
+			Reload(Client.Localize<OrganizationalItemData>(this.Id));
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<OrganizationalItemData>(this.Id));
+			Reload(Client.UnLocalize<OrganizationalItemData>(this.Id));
 		}
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mAccessControlList == null)
-					mAccessControlList = new AccessControlList(Session, mOrganizationalItemData.AccessControlList);
+					mAccessControlList = new AccessControlList(Client, mOrganizationalItemData.AccessControlList);
 
 				return mAccessControlList;
 			}

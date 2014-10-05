@@ -34,9 +34,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AccessControlEntry"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="bluePrintInfo"><see cref="T:Tridion.ContentManager.CoreService.Client.AccessControlEntryData" /></param>
-		public AccessControlEntry(Session session, AccessControlEntryData accessControlEntryData): base(session)
+		public AccessControlEntry(Client client, AccessControlEntryData accessControlEntryData): base(client)
 		{
 			mAccessControlEntryData = accessControlEntryData;
 		}
@@ -114,10 +114,10 @@ namespace TcmCoreService.Info
 					switch (uri.ItemType)
 					{
 						case (int)ItemType.User:
-							mTrustee = new User(Session, uri);
+							mTrustee = new User(Client, uri);
 							break;
 						case (int)ItemType.Group:
-							mTrustee = new Group(Session, uri);
+							mTrustee = new Group(Client, uri);
 							break;
 					}
 				}

@@ -37,9 +37,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PageTemplate"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="pageTemplateData"><see cref="T:Tridion.ContentManager.CoreService.Client.PageTemplateData" /></param>
-		protected PageTemplate(Session session, PageTemplateData pageTemplateData): base(session, pageTemplateData)
+		protected PageTemplate(Client client, PageTemplateData pageTemplateData): base(client, pageTemplateData)
 		{
 			if (pageTemplateData == null)
 				throw new ArgumentNullException("pageTemplateData");
@@ -50,9 +50,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PageTemplate"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal PageTemplate(Session session, TcmUri uri): this(session, session.Read<PageTemplateData>(uri))
+		internal PageTemplate(Client client, TcmUri uri): this(client, client.Read<PageTemplateData>(uri))
 		{
 		}
 
@@ -77,7 +77,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<PageTemplateData>(this.Id));
+			Reload(Client.Read<PageTemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<PageTemplateData>(this.Id));
+			Reload(Client.Localize<PageTemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<PageTemplateData>(this.Id));
+			Reload(Client.UnLocalize<PageTemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -107,7 +107,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mApprovalStatus == null && mPageTemplateData.ApprovalStatus.IdRef != TcmUri.NullUri)
-					mApprovalStatus = new ApprovalStatus(Session, mPageTemplateData.ApprovalStatus.IdRef);
+					mApprovalStatus = new ApprovalStatus(Client, mPageTemplateData.ApprovalStatus.IdRef);
 
 				return mApprovalStatus;
 			}
@@ -143,7 +143,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mWorkflow == null && mPageTemplateData.WorkflowInfo != null)
-					mWorkflow = new Info.Workflow(Session, mPageTemplateData.WorkflowInfo);
+					mWorkflow = new Info.Workflow(Client, mPageTemplateData.WorkflowInfo);
 
 				return mWorkflow;				
 			}

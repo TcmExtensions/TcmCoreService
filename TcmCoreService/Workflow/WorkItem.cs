@@ -29,12 +29,14 @@ namespace TcmCoreService.Workflow
 	{
 		private WorkItemData mWorkItemData;
 
+
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WorkItem"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="workItemData"><see cref="T:Tridion.ContentManager.CoreService.Client.WorkItemData" /></param>
-		protected WorkItem(Session session, WorkItemData workItemData): base(session, workItemData)
+		protected WorkItem(Client client, WorkItemData workItemData): base(client, workItemData)
 		{
 			if (workItemData == null)
 				throw new ArgumentNullException("workItemData");
@@ -45,9 +47,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WorkItem"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal WorkItem(Session session, TcmUri uri): this(session, session.Read<WorkItemData>(uri))
+		internal WorkItem(Client client, TcmUri uri): this(client, client.Read<WorkItemData>(uri))
 		{
 		}
 
@@ -69,7 +71,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<WorkItemData>(this.Id));
+			Reload(Client.Read<WorkItemData>(this.Id));
 		}
 	}
 }

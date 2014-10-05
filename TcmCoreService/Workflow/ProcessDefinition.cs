@@ -33,9 +33,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ProcessDefinition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="processDefinitionData"><see cref="T:Tridion.ContentManager.CoreService.Client.ProcessDefinitionData" /></param>
-		protected ProcessDefinition(Session session, ProcessDefinitionData processDefinitionData): base(session, processDefinitionData)
+		protected ProcessDefinition(Client client, ProcessDefinitionData processDefinitionData): base(client, processDefinitionData)
 		{
 			if (processDefinitionData == null)
 				throw new ArgumentNullException("processDefinitionData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ProcessDefinition"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal ProcessDefinition(Session session, TcmUri uri): this(session, session.Read<ProcessDefinitionData>(uri))
+		internal ProcessDefinition(Client client, TcmUri uri): this(client, client.Read<ProcessDefinitionData>(uri))
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<ProcessDefinitionData>(this.Id));
+			Reload(Client.Read<ProcessDefinitionData>(this.Id));
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<ProcessDefinitionData>(this.Id));
+			Reload(Client.Localize<ProcessDefinitionData>(this.Id));
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<ProcessDefinitionData>(this.Id));
+			Reload(Client.UnLocalize<ProcessDefinitionData>(this.Id));
 		}
 	}
 }

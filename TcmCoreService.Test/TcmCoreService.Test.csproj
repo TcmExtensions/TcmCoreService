@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcmCoreService\TcmCoreService.csproj">
-      <Project>{01abac1c-de68-4e0b-becc-6d28ca46cda1}</Project>
+      <Project>{01ABAC1C-DE68-4E0B-BECC-6D28CA46CDA1}</Project>
       <Name>TcmCoreService</Name>
     </ProjectReference>
   </ItemGroup>

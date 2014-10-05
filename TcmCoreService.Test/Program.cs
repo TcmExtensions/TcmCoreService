@@ -13,19 +13,27 @@ namespace TcmCoreService.Test
 	{
 		static void Main(string[] args)
 		{
-			using (Session session = new Session(new Uri("http://cmsdev")))
+			using (Client client = new Client (new Uri ("http://192.168.10.141"),
+				"user", "tridion")) 
+			{
+				String version = client.ApiVersion;
+			}
+
+			using (Session session = new Session(TcmCoreService.Configuration.ClientMode.HttpClient,
+				new Uri("http://192.168.10.141"),
+				"TRIDION2013", "user", "tridion"))
 			{
 				String version = session.ApiVersion;
 				String sessionId = session.SessionId;
 
-				Folder folder = session.GetFolder("tcm:229-68086-2");
+				//Folder folder = session.GetFolder("tcm:229-68086-2");
 
-				Component component = session.GetComponent("tcm:233-193779");
+				//Component component = session.GetComponent("tcm:233-193779");
 
-				ComponentTemplate componentTemplate = session.GetComponentTemplate("tcm:230-539152-32");
+				//ComponentTemplate componentTemplate = session.GetComponentTemplate("tcm:230-539152-32");
 
-				Page page = session.GetPage("tcm:233-1216852-64");
-				ComponentPresentation componentPresentation = page.ComponentPresentations.First();
+				//Page page = session.GetPage("tcm:233-1216852-64");
+				//ComponentPresentation componentPresentation = page.ComponentPresentations.First();
 			}
 		}
 	}

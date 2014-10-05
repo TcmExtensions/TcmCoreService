@@ -41,9 +41,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ComponentTemplate"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="componentTemplateData"><see cref="T:Tridion.ContentManager.CoreService.Client.ComponentTemplateData" /></param>
-		protected ComponentTemplate(Session session, ComponentTemplateData componentTemplateData): base(session, componentTemplateData)
+		protected ComponentTemplate(Client client, ComponentTemplateData componentTemplateData): base(client, componentTemplateData)
 		{
 			if (componentTemplateData == null)
 				throw new ArgumentNullException("componentTemplateData");
@@ -54,9 +54,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ComponentTemplate"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal ComponentTemplate(Session session, TcmUri uri): this(session, session.Read<ComponentTemplateData>(uri))
+		internal ComponentTemplate(Client client, TcmUri uri): this(client, client.Read<ComponentTemplateData>(uri))
 		{
 		}
 
@@ -83,7 +83,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<ComponentTemplateData>(Id));
+			Reload(Client.Read<ComponentTemplateData>(Id));
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<ComponentTemplateData>(this.Id));
+			Reload(Client.Localize<ComponentTemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<ComponentTemplateData>(this.Id));
+			Reload(Client.UnLocalize<ComponentTemplateData>(this.Id));
 		}
 
 		/// <summary>
@@ -131,7 +131,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mApprovalStatus == null && mComponentTemplateData.ApprovalStatus.IdRef != TcmUri.NullUri)
-					mApprovalStatus = new ApprovalStatus(Session, mComponentTemplateData.ApprovalStatus.IdRef);
+					mApprovalStatus = new ApprovalStatus(Client, mComponentTemplateData.ApprovalStatus.IdRef);
 
 				return mApprovalStatus;
 			}
@@ -202,7 +202,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mRelatedSchemas == null && mComponentTemplateData.RelatedSchemas != null)
-					mRelatedSchemas = mComponentTemplateData.RelatedSchemas.Select(schema => new Schema(Session, schema.IdRef));
+					mRelatedSchemas = mComponentTemplateData.RelatedSchemas.Select(schema => new Schema(Client, schema.IdRef));
 
 				return mRelatedSchemas;
 			}
@@ -233,7 +233,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mTrackingCategories == null && mComponentTemplateData.TrackingCategories != null)
-					mTrackingCategories = mComponentTemplateData.TrackingCategories.Select(category => new Category(Session, category.IdRef));
+					mTrackingCategories = mComponentTemplateData.TrackingCategories.Select(category => new Category(Client, category.IdRef));
 
 				return mTrackingCategories;
 			}
@@ -264,7 +264,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mWorkflow == null && mComponentTemplateData.WorkflowInfo != null)
-					mWorkflow = new Info.Workflow(Session, mComponentTemplateData.WorkflowInfo);
+					mWorkflow = new Info.Workflow(Client, mComponentTemplateData.WorkflowInfo);
 
 				return mWorkflow;
 			}

@@ -36,9 +36,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ComponentPresentation" /> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="componentPresentationData"><see cref="T:Tridion.ContentManager.CoreService.Client.ComponentPresentationData" /></param>
-		internal ComponentPresentation(Session session, ComponentPresentationData componentPresentationData): base(session)			
+		internal ComponentPresentation(Client client, ComponentPresentationData componentPresentationData): base(client)			
 		{
 			mComponentPresentationData = componentPresentationData;
 		}
@@ -54,7 +54,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mComponent == null)
-					mComponent = new Component(Session, mComponentPresentationData.Component.IdRef);
+					mComponent = new Component(Client, mComponentPresentationData.Component.IdRef);
 
 				return mComponent;
 			}
@@ -76,7 +76,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mComponentTemplate == null)
-					mComponentTemplate = new ComponentTemplate(Session, mComponentPresentationData.ComponentTemplate.IdRef);
+					mComponentTemplate = new ComponentTemplate(Client, mComponentPresentationData.ComponentTemplate.IdRef);
 
 				return mComponentTemplate;
 			}
@@ -98,7 +98,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mTargetGroupConditions == null)
-					mTargetGroupConditions = mComponentPresentationData.Conditions.Select(targetGroupConditionData => new TargetGroupCondition(Session, targetGroupConditionData));
+					mTargetGroupConditions = mComponentPresentationData.Conditions.Select(targetGroupConditionData => new TargetGroupCondition(Client, targetGroupConditionData));
 
 				return mTargetGroupConditions;
 			}

@@ -34,9 +34,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetDestination"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="binaryContentData"><see cref="T:Tridion.ContentManager.CoreService.Client.TargetDestinationData" /></param>
-		public TargetDestination(Session session, TargetDestinationData targetDestinationData): base(session)
+		public TargetDestination(Client client, TargetDestinationData targetDestinationData): base(client)
 		{
 			mTargetDestinationData = targetDestinationData;			
 		}
@@ -71,7 +71,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mProtocolSchema == null)
-					mProtocolSchema = new Schema(Session, mTargetDestinationData.ProtocolSchema.IdRef);
+					mProtocolSchema = new Schema(Client, mTargetDestinationData.ProtocolSchema.IdRef);
 
 				return mProtocolSchema;
 			}

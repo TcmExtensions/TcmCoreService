@@ -74,7 +74,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<BluePrintNodeData>(this.Id));			
+			Reload(Client.Read<BluePrintNodeData>(this.Id));			
 		}
 
 		/// <summary>
@@ -94,34 +94,34 @@ namespace TcmCoreService.ContentManagement
 					switch (uri.ItemType)
 					{
 						case (int)ItemType.Folder:
-							mItem = new Folder(Session, uri);
+							mItem = new Folder(Client, uri);
 							break;
 						case (int)ItemType.VirtualFolder:
-							mItem = new VirtualFolder(Session, uri);
+							mItem = new VirtualFolder(Client, uri);
 							break;
 						case (int)ItemType.Category:
-							mItem = new Category(Session, uri);
+							mItem = new Category(Client, uri);
 							break;
 						case (int)ItemType.StructureGroup:
-							mItem = new StructureGroup(Session, uri);
+							mItem = new StructureGroup(Client, uri);
 							break;
 						case (int)ItemType.Component:
-							mItem = new Component(Session, uri);
+							mItem = new Component(Client, uri);
 							break;
 						case (int)ItemType.ComponentTemplate:
-							mItem = new ComponentTemplate(Session, uri);
+							mItem = new ComponentTemplate(Client, uri);
 							break;
 						case (int)ItemType.Schema:
-							mItem = new Schema(Session, uri);
+							mItem = new Schema(Client, uri);
 							break;
 						case (int)ItemType.Keyword:
-							mItem = new Keyword(Session, uri);
+							mItem = new Keyword(Client, uri);
 							break;
 						case (int)ItemType.PageTemplate:
-							mItem = new PageTemplate(Session, uri);
+							mItem = new PageTemplate(Client, uri);
 							break;
 						case (int)ItemType.TemplateBuildingBlock:
-							mItem = new TemplateBuildingBlock(Session, uri);
+							mItem = new TemplateBuildingBlock(Client, uri);
 							break;
 					}
 				}

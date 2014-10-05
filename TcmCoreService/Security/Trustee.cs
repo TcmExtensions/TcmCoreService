@@ -33,9 +33,9 @@ namespace TcmCoreService.Security
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Trustee"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="trustreeData"><see cref="T:Tridion.ContentManager.CoreService.Client.TrusteeData" /></param>
-		protected Trustee(Session session, TrusteeData trustreeData): base(session, trustreeData)
+		protected Trustee(Client client, TrusteeData trustreeData): base(client, trustreeData)
 		{
 			if (trustreeData == null)
 				throw new ArgumentNullException("trustreeData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.Security
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Trustee"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Trustee(Session session, TcmUri uri): this(session, session.Read<TrusteeData>(uri))
+		internal Trustee(Client client, TcmUri uri): this(client, client.Read<TrusteeData>(uri))
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TcmCoreService.Security
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TrusteeData>(this.Id));
+			Reload(Client.Read<TrusteeData>(this.Id));
 		}
 	}
 }

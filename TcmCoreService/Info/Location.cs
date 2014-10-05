@@ -36,9 +36,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Location"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="locationInfo"><see cref="T:Tridion.ContentManager.CoreService.Client.LocationInfo" /></param>
-		internal Location(Session session, LocationInfo locationInfo): base(session)
+		internal Location(Client client, LocationInfo locationInfo): base(client)
 		{
 			mLocationInfo = locationInfo;
 		}
@@ -82,7 +82,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mContextRepository == null)
-					mContextRepository = new Repository(Session, mLocationInfo.ContextRepository.IdRef);
+					mContextRepository = new Repository(Client, mLocationInfo.ContextRepository.IdRef);
 
 				return mContextRepository;
 			}
@@ -105,16 +105,16 @@ namespace TcmCoreService.Info
 					switch (uri.ItemType)
 					{
 						case (int)ItemType.Folder:
-							mOrganizationalItem = new Folder(Session, uri);
+							mOrganizationalItem = new Folder(Client, uri);
 							break;
 						case (int)ItemType.VirtualFolder:
-							mOrganizationalItem = new VirtualFolder(Session, uri);
+							mOrganizationalItem = new VirtualFolder(Client, uri);
 							break;
 						case (int)ItemType.Category:
-							mOrganizationalItem = new Category(Session, uri);
+							mOrganizationalItem = new Category(Client, uri);
 							break;
 						case (int)ItemType.StructureGroup:
-							mOrganizationalItem = new StructureGroup(Session, uri);
+							mOrganizationalItem = new StructureGroup(Client, uri);
 							break;
 						default:
 							return null;

@@ -41,9 +41,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RepositoryLocalObject"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="TcmCoreService.Client" /></param>
 		/// <param name="repositoryLocalObjectData"><see cref="T:Tridion.ContentManager.CoreService.Client.RepositoryLocalObjectData" /></param>
-		protected RepositoryLocalObject(Session session, RepositoryLocalObjectData repositoryLocalObjectData): base(session, repositoryLocalObjectData)
+		protected RepositoryLocalObject(Client client, RepositoryLocalObjectData repositoryLocalObjectData): base(client, repositoryLocalObjectData)
 		{
 			if (repositoryLocalObjectData == null)
 				throw new ArgumentNullException("repositoryLocalObjectData");
@@ -54,9 +54,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RepositoryLocalObject"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal RepositoryLocalObject(Session session, TcmUri uri): this(session, session.Read<RepositoryLocalObjectData>(uri))
+		internal RepositoryLocalObject(Client client, TcmUri uri): this(client, client.Read<RepositoryLocalObjectData>(uri))
 		{
 		}
 
@@ -84,7 +84,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<RepositoryLocalObjectData>(this.Id));
+			Reload(Client.Read<RepositoryLocalObjectData>(this.Id));
 		}
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public virtual void Localize()
 		{
-			Reload(Session.Localize<RepositoryLocalObjectData>(this.Id));
+			Reload(Client.Localize<RepositoryLocalObjectData>(this.Id));
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public virtual void UnLocalize()
 		{
-			Reload(Session.UnLocalize<RepositoryLocalObjectData>(this.Id));
+			Reload(Client.UnLocalize<RepositoryLocalObjectData>(this.Id));
 		}
 
 		/// <summary>
@@ -114,7 +114,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mBluePrint == null && mRepositoryLocalObjectData.BluePrintInfo != null)
-					mBluePrint = new BluePrint(Session, mRepositoryLocalObjectData.BluePrintInfo);
+					mBluePrint = new BluePrint(Client, mRepositoryLocalObjectData.BluePrintInfo);
 
 				return mBluePrint;
 			}
@@ -131,7 +131,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mCreator == null)
-					mCreator = new User(Session, (mRepositoryLocalObjectData.VersionInfo as LimitedVersionInfo).Creator.IdRef);
+					mCreator = new User(Client, (mRepositoryLocalObjectData.VersionInfo as LimitedVersionInfo).Creator.IdRef);
 
 				return mCreator;
 			}
@@ -148,7 +148,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mLocation == null && mRepositoryLocalObjectData.LocationInfo != null)
-					mLocation = new Location(Session, mRepositoryLocalObjectData.LocationInfo);
+					mLocation = new Location(Client, mRepositoryLocalObjectData.LocationInfo);
 
 				return mLocation;
 			}
@@ -183,7 +183,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mMetadataSchema == null && mRepositoryLocalObjectData.MetadataSchema.IdRef != TcmUri.NullUri)
-					mMetadataSchema = new Schema(Session, mRepositoryLocalObjectData.MetadataSchema.IdRef);
+					mMetadataSchema = new Schema(Client, mRepositoryLocalObjectData.MetadataSchema.IdRef);
 
 				return mMetadataSchema;
 			}

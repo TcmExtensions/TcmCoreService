@@ -33,9 +33,9 @@ namespace TcmCoreService.Workflow
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WorkflowObject"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="workflowObjectData"><see cref="T:Tridion.ContentManager.CoreService.Client.WorkflowObjectData" /></param>
-		protected WorkflowObject(Session session, WorkflowObjectData workflowObjectData): base(session, workflowObjectData)
+		protected WorkflowObject(Client client, WorkflowObjectData workflowObjectData): base(client, workflowObjectData)
 		{
 			if (workflowObjectData == null)
 				throw new ArgumentNullException("workflowObjectData");
@@ -70,7 +70,7 @@ namespace TcmCoreService.Workflow
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<WorkflowObjectData>(this.Id));
+			Reload(Client.Read<WorkflowObjectData>(this.Id));
 		}
 	}
 }

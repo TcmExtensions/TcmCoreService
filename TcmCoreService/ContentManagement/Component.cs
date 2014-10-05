@@ -42,9 +42,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Component"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="componentData"><see cref="T:Tridion.ContentManager.CoreService.Client.ComponentData" /></param>
-		protected Component(Session session, ComponentData componentData): base(session, componentData)
+		protected Component(Client client, ComponentData componentData): base(client, componentData)
 		{
 			if (componentData == null)
 				throw new ArgumentNullException("componentData");
@@ -55,9 +55,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Component"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Component(Session session, TcmUri uri): this(session, session.Read<ComponentData>(uri))
+		internal Component(Client client, TcmUri uri): this(client, client.Read<ComponentData>(uri))
 		{
 		}
 
@@ -85,7 +85,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<ComponentData>(this.Id));
+			Reload(Client.Read<ComponentData>(this.Id));
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<ComponentData>(this.Id));
+			Reload(Client.Localize<ComponentData>(this.Id));
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<ComponentData>(this.Id));
+			Reload(Client.UnLocalize<ComponentData>(this.Id));
 		}
 
 		/// <summary>
@@ -115,7 +115,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mApprovalStatus == null && mComponentData.ApprovalStatus.IdRef != TcmUri.NullUri)
-					mApprovalStatus = new ApprovalStatus(Session, mComponentData.ApprovalStatus.IdRef);
+					mApprovalStatus = new ApprovalStatus(Client, mComponentData.ApprovalStatus.IdRef);
 
 				return mApprovalStatus;				
 			}
@@ -164,7 +164,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mSchema == null && mComponentData.Schema.IdRef != TcmUri.NullUri)
-					mSchema = new Schema(Session, mComponentData.Schema.IdRef);
+					mSchema = new Schema(Client, mComponentData.Schema.IdRef);
 
 				return mSchema;
 			}
@@ -218,7 +218,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mBinaryContent == null && mComponentData.BinaryContent != null)
-					mBinaryContent = new BinaryContent(Session, mComponentData.BinaryContent);
+					mBinaryContent = new BinaryContent(Client, mComponentData.BinaryContent);
 
 				return mBinaryContent;
 			}
@@ -240,7 +240,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mWorkflow == null && mComponentData.WorkflowInfo != null)
-					mWorkflow = new Info.Workflow(Session, mComponentData.WorkflowInfo);
+					mWorkflow = new Info.Workflow(Client, mComponentData.WorkflowInfo);
 				
 				return mWorkflow;
 			}

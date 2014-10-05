@@ -33,9 +33,9 @@ namespace TcmCoreService.AudienceManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetGroup"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="session"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="targetGroupData"><see cref="T:Tridion.ContentManager.CoreService.Client.TargetGroupData" /></param>
-		protected TargetGroup(Session session, TargetGroupData targetGroupData): base(session, targetGroupData)
+		protected TargetGroup(Client client, TargetGroupData targetGroupData): base(client, targetGroupData)
 		{
 			if (targetGroupData == null)
 				throw new ArgumentNullException("targetGroupData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.AudienceManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetGroup"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal TargetGroup(Session session, TcmUri uri): this(session, session.Read<TargetGroupData>(uri))
+		internal TargetGroup(Client client, TcmUri uri): this(client, client.Read<TargetGroupData>(uri))
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TcmCoreService.AudienceManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TargetGroupData>(this.Id));
+			Reload(Client.Read<TargetGroupData>(this.Id));
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace TcmCoreService.AudienceManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<TargetGroupData>(this.Id));
+			Reload(Client.Localize<TargetGroupData>(this.Id));
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace TcmCoreService.AudienceManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<TargetGroupData>(this.Id));			
+			Reload(Client.UnLocalize<TargetGroupData>(this.Id));			
 		}
 
 		/// <summary>

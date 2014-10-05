@@ -33,9 +33,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Folder"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="folderData"><see cref="T:Tridion.ContentManager.CoreService.Client.FolderData" /></param>
-		protected Folder(Session session, FolderData folderData): base(session, folderData)
+		protected Folder(Client client, FolderData folderData): base(client, folderData)
 		{
 			if (folderData == null)
 				throw new ArgumentNullException("folderData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Folder"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal Folder(Session session, TcmUri uri): this(session, session.Read<FolderData>(uri))
+		internal Folder(Client client, TcmUri uri): this(client, client.Read<FolderData>(uri))
 		{
 		}
 
@@ -72,7 +72,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<FolderData>(this.Id));
+			Reload(Client.Read<FolderData>(this.Id));
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<FolderData>(this.Id));
+			Reload(Client.Localize<FolderData>(this.Id));
 		}
 
 		/// <summary>
@@ -88,7 +88,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<FolderData>(this.Id));
+			Reload(Client.UnLocalize<FolderData>(this.Id));
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace TcmCoreService.ContentManagement
 			get
 			{
 				if (mLinkedSchema == null && mFolderData.LinkedSchema.IdRef != TcmUri.NullUri)
-					mLinkedSchema = new Schema(Session, mFolderData.LinkedSchema.IdRef);
+					mLinkedSchema = new Schema(Client, mFolderData.LinkedSchema.IdRef);
 
 				return mLinkedSchema;
 			}

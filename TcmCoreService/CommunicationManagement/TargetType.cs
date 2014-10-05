@@ -35,9 +35,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetType"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="targetTypeData"><see cref="T:Tridion.ContentManager.CoreService.Client.TargetTypeData" /></param>
-		protected TargetType(Session session, TargetTypeData targetTypeData): base(session, targetTypeData)
+		protected TargetType(Client client, TargetTypeData targetTypeData): base(client, targetTypeData)
 		{
 			if (targetTypeData == null)
 				throw new ArgumentNullException("targetTypeData");
@@ -48,9 +48,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetType"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal TargetType(Session session, TcmUri uri): this(session, session.Read<TargetTypeData>(uri))
+		internal TargetType(Client client, TcmUri uri): this(client, client.Read<TargetTypeData>(uri))
 		{
 		}
 
@@ -74,7 +74,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TargetTypeData>(this.Id));			
+			Reload(Client.Read<TargetTypeData>(this.Id));			
 		}
 
 		/// <summary>
@@ -88,7 +88,7 @@ namespace TcmCoreService.CommunicationManagement
 			get
 			{
 				if (mAccessControlList == null)
-					mAccessControlList = new AccessControlList(Session, mTargetTypeData.AccessControlList);
+					mAccessControlList = new AccessControlList(Client, mTargetTypeData.AccessControlList);
 
 				return mAccessControlList;
 			}

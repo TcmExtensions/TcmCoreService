@@ -34,9 +34,9 @@ namespace TcmCoreService.Info
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BinaryContent"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="binaryContentData"><see cref="T:Tridion.ContentManager.CoreService.Client.BinaryContentData" /></param>
-		public BinaryContent(Session session, BinaryContentData binaryContentData): base(session)
+		public BinaryContent(Client client, BinaryContentData binaryContentData): base(client)
 		{
 			mBinaryContentData = binaryContentData;
 		}
@@ -136,7 +136,7 @@ namespace TcmCoreService.Info
 			get
 			{
 				if (mMultimediaType == null)
-					mMultimediaType = new MultimediaType(Session, mBinaryContentData.MultimediaType.IdRef);
+					mMultimediaType = new MultimediaType(Client, mBinaryContentData.MultimediaType.IdRef);
 
 				return mMultimediaType;				
 			}

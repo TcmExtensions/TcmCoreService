@@ -17,9 +17,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SystemWideObject"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="systemWideObjectData"><see cref="T:Tridion.ContentManager.CoreService.Client.SystemWideObjectData" /></param>
-		protected SystemWideObject(Session session, SystemWideObjectData systemWideObjectData): base(session, systemWideObjectData)
+		protected SystemWideObject(Client client, SystemWideObjectData systemWideObjectData): base(client, systemWideObjectData)
 		{
 			if (systemWideObjectData == null)
 				throw new ArgumentNullException("systemWideObjectData");
@@ -30,9 +30,9 @@ namespace TcmCoreService.ContentManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SystemWideObject"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal SystemWideObject(Session session, TcmUri uri): this(session, session.Read<SystemWideObjectData>(uri))
+		internal SystemWideObject(Client client, TcmUri uri): this(client, client.Read<SystemWideObjectData>(uri))
 		{
 		}
 
@@ -54,7 +54,7 @@ namespace TcmCoreService.ContentManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<SystemWideObjectData>(this.Id));
+			Reload(Client.Read<SystemWideObjectData>(this.Id));
 		}
 	}
 }

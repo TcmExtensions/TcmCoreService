@@ -33,9 +33,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PublishingTarget"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="publishingTargetData"><see cref="T:Tridion.ContentManager.CoreService.Client.PublishingTargetData" /></param>
-		protected PublishingTarget(Session session, PublishingTargetData publishingTargetData): base(session, publishingTargetData)
+		protected PublishingTarget(Client client, PublishingTargetData publishingTargetData): base(client, publishingTargetData)
 		{
 			if (publishingTargetData == null)
 				throw new ArgumentNullException("publishingTargetData");
@@ -46,9 +46,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PublishingTarget"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal PublishingTarget(Session session, TcmUri uri): this(session, session.Read<PublishingTargetData>(uri))
+		internal PublishingTarget(Client client, TcmUri uri): this(client, client.Read<PublishingTargetData>(uri))
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<PublishingTargetData>(this.Id));			
+			Reload(Client.Read<PublishingTargetData>(this.Id));			
 		}
 
 		/// <summary>

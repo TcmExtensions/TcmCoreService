@@ -25,28 +25,28 @@ namespace TcmCoreService.Info
 	/// </summary>
 	public abstract class InfoBase
 	{
-		private Session mSession;
+		private Client mClient;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="InfoBase"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
-		protected InfoBase(Session session)
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
+		protected InfoBase(Client client)
 		{
-			mSession = session;
+			mClient = client;
 		}
 
 		/// <summary>
-		/// Gets <see cref="T:TcmCoreService.Session" />
+		/// Gets <see cref="T:TcmCoreService.Client" />
 		/// </summary>
 		/// <value>
-		/// <see cref="T:TcmCoreService.Session" />
+		/// <see cref="T:TcmCoreService.Client" />
 		/// </value>
-		protected Session Session
+		protected Client Client
 		{
 			get
 			{
-				return mSession;
+				return mClient;
 			}
 		}
 	}

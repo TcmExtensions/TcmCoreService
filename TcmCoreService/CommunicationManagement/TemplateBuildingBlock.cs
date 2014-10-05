@@ -32,9 +32,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TemplateBuildingBlock"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="templateData"><see cref="T:Tridion.ContentManager.CoreService.Client.TemplateBuildingBlockData" /></param>
-		protected TemplateBuildingBlock(Session session, TemplateBuildingBlockData templateBuildingBlockData): base(session, templateBuildingBlockData)
+		protected TemplateBuildingBlock(Client client, TemplateBuildingBlockData templateBuildingBlockData): base(client, templateBuildingBlockData)
 		{
 			if (templateBuildingBlockData == null)
 				throw new ArgumentNullException("templateBuildingBlockData");
@@ -45,9 +45,9 @@ namespace TcmCoreService.CommunicationManagement
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TemplateBuildingBlock"/> class.
 		/// </summary>
-		/// <param name="session"><see cref="T:TcmCoreService.Session" /></param>
+		/// <param name="client"><see cref="T:TcmCoreService.Session" /></param>
 		/// <param name="uri"><see cref="T:TcmCoreService.Misc.TcmUri" /></param>
-		internal TemplateBuildingBlock(Session session, TcmUri uri): this(session, session.Read<TemplateBuildingBlockData>(uri))
+		internal TemplateBuildingBlock(Client client, TcmUri uri): this(client, client.Read<TemplateBuildingBlockData>(uri))
 		{
 		}
 
@@ -69,7 +69,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Reload()
 		{
-			Reload(Session.Read<TemplateBuildingBlockData>(this.Id));
+			Reload(Client.Read<TemplateBuildingBlockData>(this.Id));
 		}
 
 		/// <summary>
@@ -77,7 +77,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void Localize()
 		{
-			Reload(Session.Localize<TemplateBuildingBlockData>(this.Id));
+			Reload(Client.Localize<TemplateBuildingBlockData>(this.Id));
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// </summary>
 		public override void UnLocalize()
 		{
-			Reload(Session.UnLocalize<TemplateBuildingBlockData>(this.Id));
+			Reload(Client.UnLocalize<TemplateBuildingBlockData>(this.Id));
 		}
 	}
 }
