@@ -36,6 +36,7 @@ namespace TcmCoreService.CommunicationManagement
 		private ApprovalStatus mApprovalStatus = null;
 		private IEnumerable<ComponentPresentation> mComponentPresentations = null;
 		private PageTemplate mPageTemplate = null;
+		private Schema mRegionSchema = null;
 		private Info.Workflow mWorkflow = null;
 
 		/// <summary>
@@ -75,6 +76,7 @@ namespace TcmCoreService.CommunicationManagement
 			mApprovalStatus = null;
 			mComponentPresentations = null;
 			mPageTemplate = null;
+			mRegionSchema = null;
 			mWorkflow = null;
 		}
 
@@ -217,6 +219,32 @@ namespace TcmCoreService.CommunicationManagement
 					mPageData.PageTemplate.IdRef = TcmUri.NullUri;
 				else
 					mPageData.PageTemplate.IdRef = mPageTemplate.Id;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="Page" /> Region <see cref="T:TcmCoreService.ContentManagement.Schema" />
+		/// </summary>
+		/// <value>
+		/// <see cref="Page" /> Region <see cref="T:TcmCoreService.ContentManagement.Schema" />
+		/// </value>
+		public Schema RegionSchema
+		{
+			get
+			{
+				if (mRegionSchema == null && mPageData.RegionSchema.IdRef != TcmUri.NullUri)
+					mRegionSchema = new Schema(Client, mPageData.RegionSchema.IdRef);
+
+				return mRegionSchema;
+			}
+			set
+			{
+				mRegionSchema = value;
+
+				if (value != null)
+					mPageData.RegionSchema.IdRef = value.Id;
+				else
+					mPageData.RegionSchema.IdRef = TcmUri.NullUri;				
 			}
 		}
 

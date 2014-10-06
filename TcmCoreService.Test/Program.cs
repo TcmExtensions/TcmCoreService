@@ -17,6 +17,15 @@ namespace TcmCoreService.Test
 				"user", "tridion")) 
 			{
 				String version = client.ApiVersion;
+				Console.WriteLine(version);
+
+				Component component = client.GetComponent("tcm:5-54");
+
+				if (component != null)
+				{
+					Console.WriteLine(component.Title);
+				}
+
 			}
 
 			using (Session session = new Session(TcmCoreService.Configuration.ClientMode.HttpClient,

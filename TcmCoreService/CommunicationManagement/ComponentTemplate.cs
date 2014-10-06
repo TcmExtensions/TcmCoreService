@@ -156,6 +156,24 @@ namespace TcmCoreService.CommunicationManagement
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="ComponentTemplate" /> is repository publishable.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this <see cref="ComponentTemplate" /> is repository publishable; otherwise, <c>false</c>.
+		/// </value>
+		public Boolean IsRepositoryPublishable
+		{
+			get
+			{
+				return mComponentTemplateData.IsRepositoryPublishable.GetValueOrDefault(false);
+			}
+			set
+			{
+				mComponentTemplateData.IsRepositoryPublishable = value;				
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the <see cref="ComponentTemplate" /> output format.
 		/// </summary>
 		/// <value>

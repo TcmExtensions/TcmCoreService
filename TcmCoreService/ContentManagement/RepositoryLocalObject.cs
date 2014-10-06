@@ -33,6 +33,7 @@ namespace TcmCoreService.ContentManagement
 		private RepositoryLocalObjectData mRepositoryLocalObjectData;
 
 		private Location mLocation = null;
+		private Info.LockInfo mLockInfo = null;
 		private BluePrint mBluePrint = null;
 
 		private Schema mMetadataSchema = null;
@@ -73,6 +74,7 @@ namespace TcmCoreService.ContentManagement
 			base.Reload(repositoryLocalObjectData);
 
 			mLocation = null;
+			mLockInfo = null;
 			mBluePrint = null;
 
 			mMetadataSchema = null;
@@ -151,6 +153,23 @@ namespace TcmCoreService.ContentManagement
 					mLocation = new Location(Client, mRepositoryLocalObjectData.LocationInfo);
 
 				return mLocation;
+			}
+		}
+
+		/// <summary>
+		/// Gets the <see cref="RepositoryLocalObject" /> <see cref="T:TcmCoreService.Info.LockInfo" />
+		/// </summary>
+		/// <value>
+		/// <see cref="RepositoryLocalObject" /> <see cref="T:TcmCoreService.Info.LockInfo" />
+		/// </value>
+		public Info.LockInfo LockInfo
+		{
+			get
+			{
+				if (mLockInfo == null && mRepositoryLocalObjectData.LockInfo != null)
+					mLockInfo = new Info.LockInfo(Client, mRepositoryLocalObjectData.LockInfo);
+
+				return mLockInfo;
 			}
 		}
 
