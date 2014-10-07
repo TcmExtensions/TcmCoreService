@@ -102,24 +102,6 @@ namespace TcmCoreService.CommunicationManagement
 		}
 
 		/// <summary>
-		/// Gets or sets the <see cref="PublicationTarget"/> description.
-		/// </summary>
-		/// <value>
-		/// <see cref="PublicationTarget"/> description.
-		/// </value>
-		public String Description
-		{
-			get
-			{
-				return mPublicationTargetData.Description;
-			}
-			set
-			{
-				mPublicationTargetData.Description = value;		
-			}
-		}
-
-		/// <summary>
 		/// Gets or sets the <see cref="PublicationTarget" /> <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.Info.TargetDestination}" />
 		/// </summary>
 		/// <value>

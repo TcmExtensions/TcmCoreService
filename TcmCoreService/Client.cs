@@ -67,6 +67,9 @@ namespace TcmCoreService
 			{
 				mClient.ClientCredentials.UserName.UserName = userName;
 				mClient.ClientCredentials.UserName.Password = password;
+
+                mClient.ChannelFactory.Credentials.UserName.UserName = userName;
+                mClient.ChannelFactory.Credentials.UserName.Password = password;
 			}
 		}
 

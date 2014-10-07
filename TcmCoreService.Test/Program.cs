@@ -13,7 +13,7 @@ namespace TcmCoreService.Test
 	{
 		static void Main(string[] args)
 		{
-			using (Client client = new Client (new Uri ("http://192.168.10.141"),
+			using (Client client = new Client (new Uri ("http://localhost"),
 				"user", "tridion")) 
 			{
 				String version = client.ApiVersion;

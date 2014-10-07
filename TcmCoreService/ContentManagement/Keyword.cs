@@ -149,25 +149,6 @@ namespace TcmCoreService.ContentManagement
 		}
 
 		/// <summary>
-		/// Gets or sets the <see cref="Keyword" /> title.
-		/// </summary>
-		/// <value>
-		/// <see cref="Keyword" /> title.
-		/// </value>
-		public String Title
-		{
-			get
-			{
-				return mKeywordData.Title;
-			}
-			set
-			{
-				if (!String.IsNullOrEmpty(value))
-					mKeywordData.Title = value;
-			}
-		}
-
-		/// <summary>
 		/// Gets or sets the <see cref="Keyword" /> description.
 		/// </summary>
 		/// <value>
