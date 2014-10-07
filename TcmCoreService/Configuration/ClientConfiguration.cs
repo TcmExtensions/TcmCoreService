@@ -70,15 +70,13 @@ namespace TcmCoreService.Configuration
 							{
 								MaxStringContentLength = 4 * 1048576,
 								MaxArrayLength = 4 * 1048576
-							},
-                            Security = new BasicHttpSecurity()
-                            {
-                                Mode = BasicHttpSecurityMode.TransportCredentialOnly,
-                                Transport = new HttpTransportSecurity() { ClientCredentialType = HttpClientCredentialType.Ntlm }
-                            }                            
+							}                            
 						};
 					}
 				}
+
+				mClientHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+				mClientHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Ntlm;
 	
 				return mClientHttpBinding;
 			}
