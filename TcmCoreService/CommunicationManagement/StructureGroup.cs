@@ -33,6 +33,7 @@ namespace TcmCoreService.CommunicationManagement
 
 		private PageTemplate mDefaultPageTemplate = null;
 		private ProcessDefinition mPageProcess = null;
+        private ProcessDefinition mPageBundleProcess = null;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="StructureGroup"/> class.
@@ -69,6 +70,7 @@ namespace TcmCoreService.CommunicationManagement
 			base.Reload(structureGroupData);
 
 			mDefaultPageTemplate = null;
+            mPageBundleProcess = null;
 			mPageProcess = null;
 		}
 
@@ -195,6 +197,38 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the page bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="StructureGroup" />
+        /// </summary>
+        /// <value>
+        /// Page bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="StructureGroup" />
+        /// </value>
+        public ProcessDefinition PageBundleProcess
+        {
+            get
+            {
+                if (mPageBundleProcess == null)
+                    mPageBundleProcess = new TridionProcessDefinition(Client, mStructureGroupData.PageBundleProcess.IdRef);
+
+                return mPageBundleProcess;
+            }
+            set
+            {
+                mPageBundleProcess = value;
+
+                if (value != null)
+                    mStructureGroupData.PageBundleProcess.IdRef = value.Id;
+                else
+                    mStructureGroupData.PageBundleProcess.IdRef = TcmUri.NullUri;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the page <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="StructureGroup" />
+        /// </summary>
+        /// <value>
+        /// Page <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="StructureGroup" />
+        /// </value>
 		public ProcessDefinition PageProcess
 		{
 			get

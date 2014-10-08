@@ -71,6 +71,7 @@ namespace TcmCoreService.CommunicationManagement
 			base.Reload(publicationTargetData);
 
 			mMinApprovalStatus = null;
+            mDestinations = null;
 			mPublications = null;
 			mTargetTypes = null;
 		}
@@ -107,7 +108,7 @@ namespace TcmCoreService.CommunicationManagement
 		/// <value>
 		/// <see cref="PublicationTarget" /> <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.Info.TargetDestination}" />
 		/// </value>
-		public IEnumerable<TargetDestination> TargetDestinations
+		public IEnumerable<TargetDestination> Destinations
 		{
 			get			
 			{

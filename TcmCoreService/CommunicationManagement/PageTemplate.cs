@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TcmCoreService.ContentManagement;
 using TcmCoreService.Interfaces;
 using TcmCoreService.Misc;
 using TcmCoreService.Workflow;
@@ -32,6 +33,7 @@ namespace TcmCoreService.CommunicationManagement
 		private PageTemplateData mPageTemplateData;
 
 		private ApprovalStatus mApprovalStatus = null;
+        private Schema mPageSchema = null;
 		private Info.Workflow mWorkflow = null;
 
 		/// <summary>
@@ -69,6 +71,7 @@ namespace TcmCoreService.CommunicationManagement
 			base.Reload(pageTemplateData);
 
 			mApprovalStatus = null;
+            mPageSchema = null;
 			mWorkflow = null;
 		}
 
@@ -131,6 +134,32 @@ namespace TcmCoreService.CommunicationManagement
 					mPageTemplateData.FileExtension = value;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="PageTemplate" /> Page <see cref="T:TcmCoreService.ContentManagement.Schema" />
+        /// </summary>
+        /// <value>
+        /// <see cref="PageTemplate" /> Page <see cref="T:TcmCoreService.ContentManagement.Schema" />
+        /// </value>
+        public Schema PageSchema
+        {
+            get
+            {
+                if (mPageTemplateData == null && mPageTemplateData.PageSchema.IdRef != TcmUri.NullUri)
+                    mPageSchema = new Schema(Client, mPageTemplateData.PageSchema.IdRef);
+
+                return mPageSchema;
+            }
+            set
+            {
+                mPageSchema = value;
+
+                if (value != null)
+                    mPageTemplateData.PageSchema.IdRef = value.Id;
+                else
+                    mPageTemplateData.PageSchema.IdRef = TcmUri.NullUri;
+            }
+        }
 
 		/// <summary>
 		/// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="PageTemplate" />.

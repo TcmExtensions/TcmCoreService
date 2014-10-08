@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TcmCoreService.Misc;
+using TcmCoreService.Workflow;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.CommunicationManagement
@@ -28,6 +29,8 @@ namespace TcmCoreService.CommunicationManagement
 	public class TemplateBuildingBlock : Template
 	{
 		private TemplateBuildingBlockData mTemplateBuildingBlockData;
+        private ApprovalStatus mApprovalStatus = null;
+        private Info.Workflow mWorkflow = null;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TemplateBuildingBlock"/> class.
@@ -62,6 +65,9 @@ namespace TcmCoreService.CommunicationManagement
 
 			mTemplateBuildingBlockData = templateBuildingBlockData;
 			base.Reload(templateBuildingBlockData);
+
+            mApprovalStatus = null;
+            mWorkflow = null;
 		}
 
 		/// <summary>
@@ -87,5 +93,39 @@ namespace TcmCoreService.CommunicationManagement
 		{
 			Reload(Client.UnLocalize<TemplateBuildingBlockData>(this.Id));
 		}
+
+        /// <summary>
+        /// Retrieves the <see cref="T:TcmCoreService.Workflow.ApprovalStatus" /> of this <see cref="TemplateBuildingBlock" />
+        /// </summary>
+        /// <value>
+        /// <see cref="T:TcmCoreService.Workflow.ApprovalStatus" /> of this <see cref="TemplateBuildingBlock" />
+        /// </value>
+        public ApprovalStatus ApprovalStatus
+        {
+            get
+            {
+                if (mApprovalStatus == null && mTemplateBuildingBlockData.ApprovalStatus.IdRef != TcmUri.NullUri)
+                    mApprovalStatus = new ApprovalStatus(Client, mTemplateBuildingBlockData.ApprovalStatus.IdRef);
+
+                return mApprovalStatus;
+            }
+        }
+
+        /// <summary>
+        /// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="TemplateBuildingBlock" />.
+        /// </summary>
+        /// <value>
+        /// <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="TemplateBuildingBlock" />
+        /// </value>
+        public Info.Workflow Workflow
+        {
+            get
+            {
+                if (mWorkflow == null && mTemplateBuildingBlockData.WorkflowInfo != null)
+                    mWorkflow = new Info.Workflow(Client, mTemplateBuildingBlockData.WorkflowInfo);
+
+                return mWorkflow;
+            }
+        }
 	}
 }

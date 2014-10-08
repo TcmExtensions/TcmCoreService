@@ -39,6 +39,7 @@ namespace TcmCoreService.CommunicationManagement
 		private TemplateBuildingBlock mDefaultTemplateBuildingBlock = null;
 		private PageTemplate mPageSnapshotTemplate = null;
 		private ProcessDefinition mPageTemplateProcess = null;
+        private ProcessDefinition mTemplateBundleProcess = null;
 		private StructureGroup mRootStructureGroup = null;
 
 		/// <summary>
@@ -83,6 +84,7 @@ namespace TcmCoreService.CommunicationManagement
 			mDefaultTemplateBuildingBlock = null;
 			mPageSnapshotTemplate = null;
 			mPageTemplateProcess = null;
+            mTemplateBundleProcess = null;
 			mRootStructureGroup = null;
 		}
 
@@ -440,5 +442,31 @@ namespace TcmCoreService.CommunicationManagement
 				mPublicationData.ShareProcessAssociations = value;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the template bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Template bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Publication" />
+        /// </value>
+        public ProcessDefinition TemplateBundleProcess
+        {
+            get
+            {
+                if (mTemplateBundleProcess == null && mPublicationData.TemplateBundleProcess != null)
+                    mTemplateBundleProcess = new TridionProcessDefinition(Client, mPublicationData.TemplateBundleProcess.IdRef);
+
+                return mTemplateBundleProcess;
+            }
+            set
+            {
+                mTemplateBundleProcess = value;
+
+                if (value != null)
+                    mPublicationData.TemplateBundleProcess.IdRef = value.Id;
+                else
+                    mPublicationData.TemplateBundleProcess.IdRef = TcmUri.NullUri;
+            }
+        }
 	}
 }
