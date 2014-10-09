@@ -87,10 +87,10 @@ namespace TcmCoreService.ContentManagement
 		{
 			get
 			{
-				TcmUri uri = mBluePrintNodeData.Item.Id;
-
 				if (mItem == null)
 				{
+                    TcmUri uri = mBluePrintNodeData.Item.Id;
+
 					switch (uri.ItemType)
 					{
 						case (int)ItemType.Folder:

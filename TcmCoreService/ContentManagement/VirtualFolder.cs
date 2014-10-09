@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TcmCoreService.Misc;
+using TcmCoreService.Workflow;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.ContentManagement
@@ -29,7 +30,9 @@ namespace TcmCoreService.ContentManagement
 	{
 		private VirtualFolderData mVirtualFolderData;
 
+        private ApprovalStatus mApprovalStatus = null;
 		private Schema mTypeSchema = null;
+        private Info.Workflow mWorkflow = null;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="VirtualFolder"/> class.
@@ -65,7 +68,9 @@ namespace TcmCoreService.ContentManagement
 			mVirtualFolderData = virtualFolderData;
 			base.Reload(virtualFolderData);
 
+            mApprovalStatus = null;
 			mTypeSchema = null;
+            mWorkflow = null;
 		}
 
 		/// <summary>
@@ -92,6 +97,23 @@ namespace TcmCoreService.ContentManagement
 			Reload(Client.UnLocalize<VirtualFolderData>(this.Id));			
 		}
 
+        /// <summary>
+        /// Retrieves the <see cref="T:TcmCoreService.Workflow.ApprovalStatus" /> of this <see cref="VirtualFolder" />
+        /// </summary>
+        /// <value>
+        /// <see cref="T:TcmCoreService.Workflow.ApprovalStatus" /> of this <see cref="VirtualFolder" />
+        /// </value>
+        public ApprovalStatus ApprovalStatus
+        {
+            get
+            {
+                if (mApprovalStatus == null && mVirtualFolderData.ApprovalStatus.IdRef != TcmUri.NullUri)
+                    mApprovalStatus = new ApprovalStatus(Client, mVirtualFolderData.ApprovalStatus.IdRef);
+
+                return mApprovalStatus;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the <see cref="VirtualFolder" /> configuration.
 		/// </summary>
@@ -111,6 +133,26 @@ namespace TcmCoreService.ContentManagement
 
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="VirtualFolder" /> description.
+        /// </summary>
+        /// <value>
+        /// The <see cref="VirtualFolder" /> description.
+        /// </value>
+        public String Description
+        {
+            get
+            {
+                return mVirtualFolderData.Description;
+            }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    mVirtualFolderData.Description = value;
+
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the <see cref="VirtualFolder" /> type <see cref="T:TcmCoreService.ContentManagement.Schema" />
@@ -137,5 +179,22 @@ namespace TcmCoreService.ContentManagement
 					mVirtualFolderData.TypeSchema.IdRef = TcmUri.NullUri;
 			}
 		}
+
+        /// <summary>
+        /// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="VirtualFolder" />.
+        /// </summary>
+        /// <value>
+        /// <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="VirtualFolder" />
+        /// </value>
+        public Info.Workflow Workflow
+        {
+            get
+            {
+                if (mWorkflow == null && mVirtualFolderData.WorkflowInfo != null)
+                    mWorkflow = new Info.Workflow(Client, mVirtualFolderData.WorkflowInfo);
+
+                return mWorkflow;
+            }
+        }
 	}
 }

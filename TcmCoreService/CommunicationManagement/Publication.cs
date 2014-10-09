@@ -34,7 +34,6 @@ namespace TcmCoreService.CommunicationManagement
 		private ComponentTemplate mComponentSnapshotTemplate = null;
 		private ProcessDefinition mComponentTemplateProcess = null;
 		private ComponentTemplate mDefaultComponentTemplate = null;
-		private Schema mDefaultMultimediaSchema = null;
 		private PageTemplate mDefaultPageTemplate = null;
 		private TemplateBuildingBlock mDefaultTemplateBuildingBlock = null;
 		private PageTemplate mPageSnapshotTemplate = null;
@@ -79,7 +78,6 @@ namespace TcmCoreService.CommunicationManagement
 			mComponentSnapshotTemplate = null;
 			mComponentTemplateProcess = null;
 			mDefaultComponentTemplate = null;
-			mDefaultMultimediaSchema = null;
 			mDefaultPageTemplate = null;
 			mDefaultTemplateBuildingBlock = null;
 			mPageSnapshotTemplate = null;
@@ -171,32 +169,6 @@ namespace TcmCoreService.CommunicationManagement
 					mPublicationData.DefaultComponentTemplate.IdRef = value.Id;
 				else
 					mPublicationData.DefaultComponentTemplate.IdRef = TcmUri.NullUri;				
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the default multimedia <see cref="T:TcmCoreService.ContentManagement.Schema" /> for this <see cref="Publication" />
-		/// </summary>
-		/// <value>
-		/// Default multimedia <see cref="T:TcmCoreService.ContentManagement.Schema" /> for this <see cref="Publication" />
-		/// </value>
-		public Schema DefaultMultimediaSchema
-		{
-			get
-			{
-				if (mDefaultMultimediaSchema == null && mPublicationData.DefaultMultimediaSchema != null)
-					mDefaultMultimediaSchema = new Schema(Client, mPublicationData.DefaultMultimediaSchema.IdRef);
-
-				return mDefaultMultimediaSchema;
-			}
-			set
-			{
-				mDefaultMultimediaSchema = value;
-
-				if (value != null)
-					mPublicationData.DefaultMultimediaSchema.IdRef = value.Id;
-				else
-					mPublicationData.DefaultMultimediaSchema.IdRef = TcmUri.NullUri;
 			}
 		}
 

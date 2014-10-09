@@ -104,7 +104,18 @@ namespace TcmCoreService.Info
 			}
 			set
 			{
+                mTargetGroupConditions = value;
 
+                if (value != null)
+                {
+                    mComponentPresentationData.Conditions = value.Select(target => new TargetGroupConditionData()
+                    {
+                        Negate = target.Negate,
+                        TargetGroup = new LinkToTargetGroupData() {  IdRef = target.TargetGroup.Id }
+                    }).ToArray();
+                }
+                else
+                    mComponentPresentationData.Conditions = null;
 			}
 		}
 	}

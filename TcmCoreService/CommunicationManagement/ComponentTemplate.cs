@@ -201,7 +201,7 @@ namespace TcmCoreService.CommunicationManagement
 		{
 			get
 			{
-				return (TemplatePriority)mComponentTemplateData.Priority.GetValueOrDefault(0);
+				return (TemplatePriority)mComponentTemplateData.Priority.GetValueOrDefault((int)TemplatePriority.NeverLink);
 			}
 			set
 			{

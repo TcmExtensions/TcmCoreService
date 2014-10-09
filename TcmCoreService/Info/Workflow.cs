@@ -137,6 +137,34 @@ namespace TcmCoreService.Info
 			}
 		}
 
+        /// <summary>
+        /// Gets <see cref="Workflow" /> assignment <see cref="T:System.DateTime" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Workflow" /> assignment <see cref="T:System.DateTimes" />
+        /// </value>
+        public DateTime AssignmentDate
+        {
+            get
+            {
+                return mWorkflowInfo.AssignmentDate.GetValueOrDefault(DateTime.MinValue);
+            }
+        }
+
+        /// <summary>
+        /// Gets <see cref="Workflow" /> due <see cref="T:System.DateTime" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Workflow" /> due <see cref="T:System.DateTime" />
+        /// </value>
+        public DateTime DueDate
+        {
+            get
+            {
+                return mWorkflowInfo.DueDate.GetValueOrDefault(DateTime.MinValue);
+            }
+        }
+
 		/// <summary>
 		/// Gets <see cref="Workflow" /> performer <see cref="T:TcmCoreService.Security.User" />
 		/// </summary>

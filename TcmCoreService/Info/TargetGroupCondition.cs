@@ -1,4 +1,19 @@
-﻿using System;
+﻿#region Header
+////////////////////////////////////////////////////////////////////////////////////
+//
+//	File Description: Target Group Condition
+// ---------------------------------------------------------------------------------
+//	Date Created	: October 9, 2014
+//	Author			: Rob van Oostenrijk
+// ---------------------------------------------------------------------------------
+// 	Change History
+//	Date Modified       : 
+//	Changed By          : 
+//	Change Description  : 
+//
+////////////////////////////////////////////////////////////////////////////////////
+#endregion
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +25,7 @@ namespace TcmCoreService.Info
 	/// <summary>
 	/// <see cref="TargetGroupCondition" /> wraps around <see cref="T:Tridion.ContentManager.CoreService.Client.TargetGroupConditionData" />
 	/// </summary>
-	public class TargetGroupCondition : InfoBase
+	public class TargetGroupCondition : Condition
 	{
 		private TargetGroupConditionData mTargetGroupConditionData;
 		private TargetGroup mTargetGroup = null;
@@ -20,7 +35,7 @@ namespace TcmCoreService.Info
 		/// </summary>
 		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
 		/// <param name="targetGroupConditionData"><see cref="T:Tridion.ContentManager.CoreService.Client.TargetGroupConditionData" /></param>
-		internal TargetGroupCondition(Client client, TargetGroupConditionData targetGroupConditionData): base(client)
+		internal TargetGroupCondition(Client client, TargetGroupConditionData targetGroupConditionData): base(client, targetGroupConditionData)
 		{
 			mTargetGroupConditionData = targetGroupConditionData;			
 		}

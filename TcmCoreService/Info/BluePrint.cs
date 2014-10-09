@@ -17,7 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TcmCoreService.CommunicationManagement;
 using TcmCoreService.ContentManagement;
+using TcmCoreService.Misc;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.Info
@@ -28,7 +30,8 @@ namespace TcmCoreService.Info
 	public class BluePrint : InfoBase
 	{
 		private BluePrintInfo mBluePrintInfo;
-		private Repository mOwningRepository = null;
+        private Repository mOwningRepository = null;
+        private RepositoryLocalObject mPrimaryBluePrintParentItem = null;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BluePrint"/> class.
@@ -56,6 +59,59 @@ namespace TcmCoreService.Info
 				return mOwningRepository;
 			}
 		}
+
+        /// <summary>
+        /// Gets the primary blueprint parent item.
+        /// </summary>
+        /// <value>
+        /// The primary blueprint parent item <see cref="T:TcmCoreService.ContentManagement.RepositoryLocalObject" />.
+        /// </value>
+        public RepositoryLocalObject PrimaryBluePrintParentItem
+        {
+            get
+            {
+                if (mPrimaryBluePrintParentItem == null)
+                {
+                    TcmUri uri = mBluePrintInfo.PrimaryBluePrintParentItem.IdRef;
+
+                    switch (uri.ItemType)
+                    {
+                        case (int)ItemType.Folder:
+                            mPrimaryBluePrintParentItem = new Folder(Client, uri);
+                            break;
+                        case (int)ItemType.VirtualFolder:
+                            mPrimaryBluePrintParentItem = new VirtualFolder(Client, uri);
+                            break;
+                        case (int)ItemType.Category:
+                            mPrimaryBluePrintParentItem = new Category(Client, uri);
+                            break;
+                        case (int)ItemType.StructureGroup:
+                            mPrimaryBluePrintParentItem = new StructureGroup(Client, uri);
+                            break;
+                        case (int)ItemType.Component:
+                            mPrimaryBluePrintParentItem = new Component(Client, uri);
+                            break;
+                        case (int)ItemType.ComponentTemplate:
+                            mPrimaryBluePrintParentItem = new ComponentTemplate(Client, uri);
+                            break;
+                        case (int)ItemType.Schema:
+                            mPrimaryBluePrintParentItem = new Schema(Client, uri);
+                            break;
+                        case (int)ItemType.Keyword:
+                            mPrimaryBluePrintParentItem = new Keyword(Client, uri);
+                            break;
+                        case (int)ItemType.PageTemplate:
+                            mPrimaryBluePrintParentItem = new PageTemplate(Client, uri);
+                            break;
+                        case (int)ItemType.TemplateBuildingBlock:
+                            mPrimaryBluePrintParentItem = new TemplateBuildingBlock(Client, uri);
+                            break;
+                    }
+                }
+
+                return mPrimaryBluePrintParentItem;
+            }
+        }
 
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="RepositoryLocalObject" /> is shared.

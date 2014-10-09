@@ -29,8 +29,6 @@ namespace TcmCoreService.Workflow
 	{
 		private WorkItemData mWorkItemData;
 
-
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WorkItem"/> class.
 		/// </summary>

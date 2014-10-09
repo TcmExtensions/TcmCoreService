@@ -72,6 +72,7 @@
     <Compile Include="Info\BinaryContent.cs" />
     <Compile Include="Info\BluePrint.cs" />
     <Compile Include="Info\ComponentPresentation.cs" />
+    <Compile Include="Info\ConditionData.cs" />
     <Compile Include="Info\Info.cs" />
     <Compile Include="Info\Location.cs" />
     <Compile Include="Info\TargetDestination.cs" />

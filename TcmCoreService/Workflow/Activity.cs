@@ -71,5 +71,33 @@ namespace TcmCoreService.Workflow
 		{
 			Reload(Client.Read<ActivityData>(this.Id));
 		}
+
+        /// <summary>
+        /// Gets <see cref="Activity" /> assignment <see cref="T:System.DateTime" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Activity" /> assignment <see cref="T:System.DateTimes" />
+        /// </value>
+        public DateTime AssignmentDate
+        {
+            get
+            {
+                return mActivityData.AssignmentDate.GetValueOrDefault(DateTime.MinValue);
+            }
+        }
+
+        /// <summary>
+        /// Gets <see cref="Activity" /> due <see cref="T:System.DateTime" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Activity" /> due <see cref="T:System.DateTime" />
+        /// </value>
+        public DateTime DueDate
+        {
+            get
+            {
+                return mActivityData.DueDate.GetValueOrDefault(DateTime.MinValue);
+            }
+        }
 	}
 }

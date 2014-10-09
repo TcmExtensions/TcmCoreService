@@ -67,7 +67,29 @@ namespace TcmCoreService.Info
 			{
 				return mBinaryContentData.BinaryId.GetValueOrDefault(0);				
 			}
+            set
+            {
+                mBinaryContentData.BinaryId = value;
+            }
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="BinaryContent" /> external binary uri
+        /// </summary>
+        /// <value>
+        /// <see cref="BinaryContent" /> external binary uri
+        /// </value>
+        public String ExternalBinaryUri
+        {
+            get
+            {
+                return mBinaryContentData.ExternalBinaryUri;
+            }
+            set
+            {
+                mBinaryContentData.ExternalBinaryUri = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets the <see cref="BinaryContent" /> binary filename
@@ -138,8 +160,37 @@ namespace TcmCoreService.Info
 				if (mMultimediaType == null)
 					mMultimediaType = new MultimediaType(Client, mBinaryContentData.MultimediaType.IdRef);
 
-				return mMultimediaType;				
-			}
+				return mMultimediaType;
+            }
 		}
+
+        /// <summary>
+        /// Gets the <see cref="BinaryContent" /> size
+        /// </summary>
+        /// <value>
+        /// <see cref="BinaryContent" /> size
+        /// </value>
+        public long Size
+        {
+            get
+            {   
+                return mBinaryContentData.Size.GetValueOrDefault(0);
+            }
+        }
+
+        /// <summary>
+        /// Sets the <see cref="BinaryContent" /> upload from file reference
+        /// </summary>
+        /// <value>
+        /// <see cref="BinaryContent" /> upload from file reference
+        /// </value>
+        public String UploadFromFile
+        {
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    mBinaryContentData.UploadFromFile = value;
+            }
+        }
 	}
 }

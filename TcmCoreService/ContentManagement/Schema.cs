@@ -32,6 +32,7 @@ namespace TcmCoreService.ContentManagement
 
 		private IEnumerable<MultimediaType> mAllowedMultimediaTypes = null;
 		private ProcessDefinition mComponentProcess = null;
+        private ProcessDefinition mBundleProcess = null;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Schema"/> class.
@@ -69,6 +70,7 @@ namespace TcmCoreService.ContentManagement
 
 			mAllowedMultimediaTypes = null;
 			mComponentProcess = null;
+            mBundleProcess = null;
 		}
 
 		/// <summary>
@@ -124,6 +126,33 @@ namespace TcmCoreService.ContentManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Schema" />
+        /// </summary>
+        /// <value>
+        /// Bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Schema" />
+        /// </value>
+        public ProcessDefinition BundleProcess
+        {
+            get
+            {
+                if (mBundleProcess == null && mSchemaData.BundleProcess != null)
+                    mBundleProcess = new TridionProcessDefinition(Client, mSchemaData.BundleProcess.IdRef);
+
+                return mBundleProcess;
+            }
+            set
+            {
+                mBundleProcess = value;
+
+                if (value != null)
+                    mSchemaData.BundleProcess.IdRef = value.Id;
+                else
+                    mSchemaData.BundleProcess.IdRef = TcmUri.NullUri;
+            }
+        }
+
+
 		/// <summary>
 		/// Gets or sets the component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Schema" />
 		/// </summary>
@@ -149,6 +178,24 @@ namespace TcmCoreService.ContentManagement
 					mSchemaData.ComponentProcess.IdRef = TcmUri.NullUri;				
 			}
 		}
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="Schema" /> bundle should be deleted.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this <see cref="Schema" /> bundle should be deleted; otherwise, <c>false</c>.
+        /// </value>
+        public Boolean DeleteBundleOnProcessFinished
+        {
+            get
+            {
+                return mSchemaData.DeleteBundleOnProcessFinished.GetValueOrDefault(false);
+            }
+            set
+            {
+                mSchemaData.DeleteBundleOnProcessFinished = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets <see cref="Schema" /> description
