@@ -50,9 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ClientTest.cs" />
     <Compile Include="ComponentTest.cs" />
     <Compile Include="SessionTest.cs" />
-    <Compile Include="ClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +60,9 @@
       <Project>{01abac1c-de68-4e0b-becc-6d28ca46cda1}</Project>
       <Name>TcmCoreService</Name>
     </ProjectReference>
+    <Reference Include="Tridion.ContentManager.CoreService.Client">
+      <HintPath>..\..\References\SDL Tridion 2013\Tridion.ContentManager.CoreService.Client.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
