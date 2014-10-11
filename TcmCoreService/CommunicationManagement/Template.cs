@@ -161,6 +161,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the <see cref="Template" /> parameter <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Template" /> parameter <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri ParameterSchemaUri
+        {
+            get
+            {
+                return mTemplateData.ParameterSchema.IdRef;
+            }
+            set
+            {
+                mParameterSchema = null;
+                 
+                if (value == null)
+                    mTemplateData.ParameterSchema.IdRef = TcmUri.NullUri;
+                else
+                    mTemplateData.ParameterSchema.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the <see cref="Template" /> type
 		/// </summary>

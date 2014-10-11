@@ -126,6 +126,20 @@ namespace TcmCoreService.ContentManagement
 			}
 		}
 
+        /// <summary>
+        /// Retrieves the <see cref="VersionedItem" /> checkout <see cref="T:TcmCoreService.Security.User" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="VersionedItem" /> checkout <see cref="T:TcmCoreService.Security.User" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri CheckOutUserUri
+        {
+            get
+            {
+                return (mVersionedItemData.VersionInfo as FullVersionInfo).CheckOutUser.IdRef;
+            }
+        }
+
 		/// <summary>
 		/// Indicates if this <see cref="VersionedItem" /> is new
 		/// </summary>
@@ -184,6 +198,20 @@ namespace TcmCoreService.ContentManagement
 				return mRevisionUser;
 			}
 		}
+
+        /// <summary>
+        /// Retrieves the <see cref="VersionedItem" /> revisor <see cref="T:TcmCoreService.Security.User" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="VersionedItem" /> revisor <see cref="T:TcmCoreService.Security.User" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri RevisionUserUri
+        {
+            get
+            {
+                return (mVersionedItemData.VersionInfo as FullVersionInfo).Revisor.IdRef;
+            }
+        }
 
 		/// <summary>
 		/// Gets the version number of this <see cref="VersionedItem" />

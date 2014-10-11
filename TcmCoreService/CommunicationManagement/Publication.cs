@@ -120,6 +120,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the component snapshot <see cref="T:TcmCoreService.CommunicationManagement.ComponentTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Component snapshot <see cref="T:TcmCoreService.CommunicationManagement.ComponentTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri ComponentSnapshotTemplateUri
+        {
+            get
+            {
+                return mPublicationData.ComponentSnapshotTemplate.IdRef;
+            }
+            set
+            {
+                mComponentSnapshotTemplate = null;
+
+                if (value == null)
+                    mPublicationData.ComponentSnapshotTemplate.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.ComponentSnapshotTemplate.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the component template <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Publication" />
 		/// </summary>
@@ -145,6 +168,29 @@ namespace TcmCoreService.CommunicationManagement
 					mPublicationData.ComponentTemplateProcess.IdRef = TcmUri.NullUri;				
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the component template <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Component template <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri ComponentTemplateProcessUri
+        {
+            get
+            {
+                return mPublicationData.ComponentTemplateProcess.IdRef;
+            }
+            set
+            {
+                mComponentTemplateProcess = null;
+
+                if (value == null)
+                    mPublicationData.ComponentTemplateProcess.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.ComponentTemplateProcess.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.ComponentTemplate" /> for this <see cref="Publication" />
@@ -172,6 +218,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.ComponentTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Default <see cref="T:TcmCoreService.CommunicationManagement.ComponentTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri DefaultComponentTemplateUri
+        {
+            get
+            {
+                return mPublicationData.DefaultComponentTemplate.IdRef;
+            }
+            set
+            {
+                mDefaultComponentTemplate = null;
+
+                if (value == null)
+                    mPublicationData.DefaultComponentTemplate.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.DefaultComponentTemplate.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> for this <see cref="Publication" />
 		/// </summary>
@@ -198,6 +267,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Default <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri DefaultPageTemplateUri
+        {
+            get
+            {
+                return mPublicationData.DefaultPageTemplate.IdRef;
+            }
+            set
+            {
+                mDefaultPageTemplate = null;
+
+                if (value == null)
+                    mPublicationData.DefaultPageTemplate.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.DefaultPageTemplate.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.TemplateBuildingBlock" /> for this <see cref="Publication" />
 		/// </summary>
@@ -223,6 +315,29 @@ namespace TcmCoreService.CommunicationManagement
 					mPublicationData.DefaultTemplateBuildingBlock.IdRef = TcmUri.NullUri;				
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.TemplateBuildingBlock" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Default <see cref="T:TcmCoreService.CommunicationManagement.TemplateBuildingBlock" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri DefaultTemplateBuildingBlockUri
+        {
+            get
+            {
+                return mPublicationData.DefaultTemplateBuildingBlock.IdRef;
+            }
+            set
+            {
+                mDefaultTemplateBuildingBlock = null;
+
+                if (value == null)
+                    mPublicationData.DefaultTemplateBuildingBlock.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.DefaultTemplateBuildingBlock.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the <see cref="Publication" /> multimedia path.
@@ -288,6 +403,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the page snapshot <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Page snapshot <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri PageSnapshotTemplateUri
+        {
+            get
+            {
+                return mPublicationData.PageSnapshotTemplate.IdRef;
+            }
+            set
+            {
+                mPageSnapshotTemplate = null;
+
+                if (value == null)
+                    mPublicationData.PageSnapshotTemplate.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.PageSnapshotTemplate.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the page template <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Publication" />
 		/// </summary>
@@ -313,6 +451,29 @@ namespace TcmCoreService.CommunicationManagement
 					mPublicationData.PageTemplateProcess.IdRef = TcmUri.NullUri;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the page template <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Page template <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri PageTemplateProcessUri
+        {
+            get
+            {
+                return mPublicationData.PageTemplateProcess.IdRef;
+            }
+            set
+            {
+                mPageTemplateProcess = null;
+
+                if (value == null)
+                    mPublicationData.PageTemplateProcess.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.PageTemplateProcess.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the <see cref="Publication" /> path.
@@ -397,6 +558,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the <see cref="Publication" /> root <see cref="T:TcmCoreService.CommunicationManagement.StructureGroup" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Publication" /> root <see cref="T:TcmCoreService.CommunicationManagement.StructureGroup" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri RootStructureGroupUri
+        {
+            get
+            {
+                return mPublicationData.RootStructureGroup.IdRef;
+            }
+            set
+            {
+                mRootStructureGroup = null;
+
+                if (value == null)
+                    mPublicationData.RootStructureGroup.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.RootStructureGroup.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets a value indicating whether to share process associations for this <see cref="Publicaiton" />
 		/// </summary>
@@ -438,6 +622,29 @@ namespace TcmCoreService.CommunicationManagement
                     mPublicationData.TemplateBundleProcess.IdRef = value.Id;
                 else
                     mPublicationData.TemplateBundleProcess.IdRef = TcmUri.NullUri;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the template bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </summary>
+        /// <value>
+        /// Template bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Publication" />
+        /// </value>
+        public TcmUri TemplateBundleProcessUri
+        {
+            get
+            {
+                return mPublicationData.TemplateBundleProcess.IdRef;
+            }
+            set
+            {
+                mTemplateBundleProcess = null;
+
+                if (value == null)
+                    mPublicationData.TemplateBundleProcess.IdRef = TcmUri.NullUri;
+                else
+                    mPublicationData.TemplateBundleProcess.IdRef = value;
             }
         }
 	}

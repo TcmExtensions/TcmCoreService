@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TcmCoreService.ContentManagement;
+using TcmCoreService.Misc;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.Info
@@ -163,6 +164,29 @@ namespace TcmCoreService.Info
 				return mMultimediaType;
             }
 		}
+
+        /// <summary>
+        /// Gets the <see cref="BinaryContent" /> <see cref="T:TcmCoreService.ContentManagement.MultimediaType" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="BinaryContent" /> <see cref="T:TcmCoreService.ContentManagement.MultimediaType" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri MultimediaTypeUri
+        {
+            get
+            {
+                return mBinaryContentData.MultimediaType.IdRef;
+            }
+            set
+            {
+                mMultimediaType = null;
+
+                if (value == null)
+                    mBinaryContentData.MultimediaType.IdRef = TcmUri.NullUri;
+                else
+                    mBinaryContentData.MultimediaType.IdRef = value;
+            }
+        }
 
         /// <summary>
         /// Gets the <see cref="BinaryContent" /> size

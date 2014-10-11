@@ -33,6 +33,7 @@ namespace TcmCoreService.ContentManagement
         private AccessControlList mAccessControlList = null;
         private Schema mDefaultMultimediaSchema = null;
         private Location mLocation = null;
+        private Schema mMetadataSchema = null;
         private IEnumerable<Repository> mParents = null;
         private Folder mRootFolder = null;
         private ProcessDefinition mTaskProcess = null;
@@ -74,6 +75,7 @@ namespace TcmCoreService.ContentManagement
             mAccessControlList = null;
             mDefaultMultimediaSchema = null;
             mLocation = null;
+            mMetadataSchema = null;
             mParents = null;
             mRootFolder = null;
             mTaskProcess = null;
@@ -146,6 +148,29 @@ namespace TcmCoreService.ContentManagement
                     mRepositoryData.DefaultMultimediaSchema.IdRef = value.Id;
                 else
                     mRepositoryData.DefaultMultimediaSchema.IdRef = TcmUri.NullUri;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Repository" /> default multimedia <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Repository" /> default multimedia <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri DefaultMultimediaSchemaUri
+        {
+            get
+            {
+                return mRepositoryData.DefaultMultimediaSchema.IdRef;
+            }
+            set
+            {
+                mDefaultMultimediaSchema = null;
+
+                if (value == null)
+                    mRepositoryData.DefaultMultimediaSchema.IdRef = TcmUri.NullUri;
+                else
+                    mRepositoryData.DefaultMultimediaSchema.IdRef = value;
             }
         }
 
@@ -224,21 +249,46 @@ namespace TcmCoreService.ContentManagement
 		/// </value>
 		public Schema MetadataSchema
 		{
-			get
-			{
-				if (mRepositoryData.MetadataSchema.IdRef != TcmUri.NullUri)
-					return new Schema(Client, mRepositoryData.MetadataSchema.IdRef);
-				else
-					return null;
-			}
-			set
-			{
-				if (value != null)
-					mRepositoryData.MetadataSchema.IdRef = value.Id;
-				else
-					mRepositoryData.MetadataSchema.IdRef = TcmUri.NullUri;
-			}
+            get
+            {
+                if (mMetadataSchema == null && mRepositoryData.MetadataSchema.IdRef != TcmUri.NullUri)
+                    mMetadataSchema = new Schema(Client, mRepositoryData.MetadataSchema.IdRef);
+
+                return mMetadataSchema;
+            }
+            set
+            {
+                mMetadataSchema = value;
+
+                if (value != null)
+                    mRepositoryData.MetadataSchema.IdRef = value.Id;
+                else
+                    mRepositoryData.MetadataSchema.IdRef = TcmUri.NullUri;
+            }
 		}
+
+        /// <summary>
+        /// Gets or sets the metadata <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// Metadata <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri MetadataSchemaUri
+        {
+            get
+            {
+                return mRepositoryData.MetadataSchema.IdRef;
+            }
+            set
+            {   
+                mMetadataSchema = null;
+
+                if (value == null)
+                    mRepositoryData.MetadataSchema.IdRef = TcmUri.NullUri;
+                else
+                    mRepositoryData.MetadataSchema.IdRef = value;
+            }
+        }
 
         /// <summary>
         /// Retrieves the list of parent <see cref="T:System.Collections.Generic.IEnumerable{Repository}" /> for this <see cref="Repository" />
@@ -264,6 +314,34 @@ namespace TcmCoreService.ContentManagement
                     {
                         IdRef = keyword.Id
                     }).ToArray();
+                else
+                    mRepositoryData.Parents = null;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the list of parent <see cref="T:System.Collections.Generic.IEnumerable{Repository}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Repository" />
+        /// </summary>
+        /// <value>
+        /// List of parent <see cref="T:System.Collections.Generic.IEnumerable{Repository}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Repository" />
+        /// </value>
+        public IEnumerable<TcmUri> ParentsUris
+        {
+            get
+            {
+                return mRepositoryData.Parents.Select(repository => new TcmUri(repository.IdRef));
+            }
+            set
+            {
+                mParents = null;
+
+                if (value != null)
+                {
+                    mRepositoryData.Parents = value.Select(repository => new LinkToRepositoryData()
+                    {
+                        IdRef = repository
+                    }).ToArray();
+                }
                 else
                     mRepositoryData.Parents = null;
             }
@@ -296,6 +374,29 @@ namespace TcmCoreService.ContentManagement
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="Repository" /> <see cref="T:TcmCoreService.ContentManagement.Folder" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Repository" /> <see cref="T:TcmCoreService.ContentManagement.Folder" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri RootFolderUri
+        {
+            get
+            {
+                return mRepositoryData.RootFolder.IdRef;
+            }
+            set
+            {
+                mRootFolder = null;
+
+                if (value == null)
+                    mRepositoryData.RootFolder.IdRef = TcmUri.NullUri;
+                else
+                    mRepositoryData.RootFolder.IdRef = value;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Repository" />
         /// </summary>
         /// <value>
@@ -318,6 +419,29 @@ namespace TcmCoreService.ContentManagement
                     mRepositoryData.TaskProcess.IdRef = value.Id;
                 else
                     mRepositoryData.TaskProcess.IdRef = TcmUri.NullUri;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Repository" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// Component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Repository" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri TaskProcessUri
+        {
+            get
+            {
+                return mRepositoryData.TaskProcess.IdRef;
+            }
+            set
+            {
+                mTaskProcess = null;
+
+                if (value == null)
+                    mRepositoryData.TaskProcess.IdRef = TcmUri.NullUri;
+                else
+                    mRepositoryData.TaskProcess.IdRef = value;
             }
         }
 	}

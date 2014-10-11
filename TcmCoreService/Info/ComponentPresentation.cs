@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using TcmCoreService.CommunicationManagement;
 using TcmCoreService.ContentManagement;
+using TcmCoreService.Misc;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.Info
@@ -65,6 +66,29 @@ namespace TcmCoreService.Info
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the <see cref="T:TcmCoreService.ContentManagement.Component" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="ComponentPresentation" />
+        /// </summary>
+        /// <value>
+        /// The <see cref="T:TcmCoreService.ContentManagement.Component" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="ComponentPresentation" />
+        /// </value>
+        public TcmUri ComponentUri
+        {
+            get
+            {
+                return mComponentPresentationData.Component.IdRef;
+            }
+            set
+            {
+                mComponent = null;
+
+                if (value != null)
+                    mComponentPresentationData.Component.IdRef = value;
+                else
+                    mComponentPresentationData.Component.IdRef = TcmUri.NullUri;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the <see cref="T:TcmCoreService.ContentManagement.ComponentTemplate" /> for this <see cref="ComponentPresentation" />
 		/// </summary>
@@ -86,6 +110,29 @@ namespace TcmCoreService.Info
 				mComponentPresentationData.ComponentTemplate.IdRef = mComponentTemplate.Id;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="T:TcmCoreService.ContentManagement.ComponentTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="ComponentPresentation" />
+        /// </summary>
+        /// <value>
+        /// The <see cref="T:TcmCoreService.ContentManagement.ComponentTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="ComponentPresentation" />
+        /// </value>
+        public TcmUri ComponentTemplateUri
+        {
+            get
+            {
+                return mComponentPresentationData.ComponentTemplate.IdRef;
+            }
+            set
+            {
+                mComponentTemplate = null;
+
+                if (value != null)
+                    mComponentPresentationData.ComponentTemplate.IdRef = value;
+                else
+                    mComponentPresentationData.ComponentTemplate.IdRef = TcmUri.NullUri;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.Info.TargetGroupCondition}" /> for this <see cref="ComponentPresentation" />
@@ -117,6 +164,6 @@ namespace TcmCoreService.Info
                 else
                     mComponentPresentationData.Conditions = null;
 			}
-		}
+		} 
 	}
 }

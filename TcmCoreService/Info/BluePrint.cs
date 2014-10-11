@@ -61,6 +61,20 @@ namespace TcmCoreService.Info
 		}
 
         /// <summary>
+        /// Gets the owning repository <see cref="T:TcmCoreService.Misc.TcmUri" />.
+        /// </summary>
+        /// <value>
+        /// The owning <see cref="T:TcmCoreService.ContentManagement.Repository" /> <see cref="T:TcmCoreService.Misc.TcmUri" />.
+        /// </value>
+        public TcmUri OwningRepositoryUri
+        {
+            get
+            {
+                return mBluePrintInfo.OwningRepository.IdRef;
+            }
+        }
+
+        /// <summary>
         /// Gets the primary blueprint parent item.
         /// </summary>
         /// <value>
@@ -110,6 +124,20 @@ namespace TcmCoreService.Info
                 }
 
                 return mPrimaryBluePrintParentItem;
+            }
+        }
+
+        /// <summary>
+        /// Gets the primary blueprint parent item <see cref="T:TcmCoreService.Misc.TcmUri" />.
+        /// </summary>
+        /// <value>
+        /// The primary blueprint parent item <see cref="T:TcmCoreService.ContentManagement.RepositoryLocalObject" /> <see cref="T:TcmCoreService.Misc.TcmUri" />.
+        /// </value>
+        public TcmUri PrimaryBluePrintParentItemUri
+        {
+            get
+            {
+                return mBluePrintInfo.PrimaryBluePrintParentItem.IdRef;
             }
         }
 

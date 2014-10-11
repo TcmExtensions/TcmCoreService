@@ -175,9 +175,32 @@ namespace TcmCoreService.ContentManagement
 				if (value != null)
 					mComponentData.Schema.IdRef = value.Id;
 				else
-					mComponentData.Schema.IdRef = TcmUri.NullUri;				
+					mComponentData.Schema.IdRef = TcmUri.NullUri;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="Component" /> <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Component" /> <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri SchemaUri
+        {
+            get
+            {
+                return mComponentData.Schema.IdRef;
+            }
+            set
+            {
+                mSchema = null;
+
+                if (value == null)
+                    mComponentData.Schema.IdRef = TcmUri.NullUri;
+                else
+                    mComponentData.Schema.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="Component" /> is based on on a mandatory schema.

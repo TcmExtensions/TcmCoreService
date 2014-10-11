@@ -222,6 +222,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets <see cref="PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Page" />
+        /// </summary>
+        /// <value>
+        /// <see cref="PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Page" />
+        /// </value>
+        public TcmUri PageTemplateUri
+        {
+            get
+            {
+                return mPageData.PageTemplate.IdRef;
+            }
+            set
+            {
+                mPageTemplate = null;
+
+                if (value == null)
+                    mPageData.PageTemplate.IdRef = TcmUri.NullUri;
+                else
+                    mPageData.PageTemplate.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the <see cref="Page" /> Region <see cref="T:TcmCoreService.ContentManagement.Schema" />
 		/// </summary>
@@ -247,6 +270,29 @@ namespace TcmCoreService.CommunicationManagement
 					mPageData.RegionSchema.IdRef = TcmUri.NullUri;				
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets Region <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Page" />
+        /// </summary>
+        /// <value>
+        /// Region <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Page" />
+        /// </value>
+        public TcmUri RegionSchemaUri
+        {
+            get
+            {
+                return mPageData.RegionSchema.IdRef;
+            }
+            set
+            {
+                mRegionSchema = null;
+
+                if (value == null)
+                    mPageData.RegionSchema.IdRef = TcmUri.NullUri;
+                else
+                    mPageData.RegionSchema.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="Page" />.

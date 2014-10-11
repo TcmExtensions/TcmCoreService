@@ -139,6 +139,20 @@ namespace TcmCoreService.ContentManagement
 			}
 		}
 
+        /// <summary>
+        /// Retrieves the <see cref="RepositoryLocalObject" /> creator <see cref="T:TcmCoreService.Security.User" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="RepositoryLocalObject" /> creator <see cref="T:TcmCoreService.Security.User" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri CreatorUri
+        {
+            get
+            {
+                return (mRepositoryLocalObjectData.VersionInfo as LimitedVersionInfo).Creator.IdRef;
+            }
+        }
+
 		/// <summary>
 		/// Gets the <see cref="RepositoryLocalObject" /> <see cref="T:TcmCoreService.Info.Location" />
 		/// </summary>
@@ -216,6 +230,29 @@ namespace TcmCoreService.ContentManagement
 				mMetadataSchema = null;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the metadata <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// Metadata <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri MetadataSchemaUri
+        {
+            get
+            {
+                return mRepositoryLocalObjectData.MetadataSchema.IdRef;
+            }
+            set
+            {
+                mMetadataSchema = null;
+
+                if (value == null)
+                    mRepositoryLocalObjectData.MetadataSchema.IdRef = TcmUri.NullUri;
+                else
+                    mRepositoryLocalObjectData.MetadataSchema.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="RepositoryLocalObject" /> is published in context.

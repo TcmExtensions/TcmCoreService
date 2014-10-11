@@ -181,6 +181,29 @@ namespace TcmCoreService.ContentManagement
 		}
 
         /// <summary>
+        /// Gets or sets the <see cref="VirtualFolder" /> type <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="VirtualFolder" /> type <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri TypeSchemaUri
+        {
+            get
+            {
+                return mVirtualFolderData.TypeSchema.IdRef;
+            }
+            set
+            {
+                mTypeSchema = null;
+
+                if (value == null)
+                    mVirtualFolderData.TypeSchema.IdRef = TcmUri.NullUri;
+                else
+                    mVirtualFolderData.TypeSchema.IdRef = value;
+            }
+        }
+
+        /// <summary>
         /// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="VirtualFolder" />.
         /// </summary>
         /// <value>

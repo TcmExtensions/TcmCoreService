@@ -161,6 +161,29 @@ namespace TcmCoreService.CommunicationManagement
             }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="PageTemplate" /> Page <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="PageTemplate" /> Page <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri PageSchemaUri
+        {
+            get
+            {
+                return mPageTemplateData.PageSchema.IdRef;
+            }
+            set
+            {
+                mPageSchema = null;
+
+                if (value == null)
+                    mPageTemplateData.PageSchema.IdRef = TcmUri.NullUri;
+                else
+                    mPageTemplateData.PageSchema.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets <see cref="T:TcmCoreService.Info.Workflow" /> for this <see cref="PageTemplate" />.
 		/// </summary>

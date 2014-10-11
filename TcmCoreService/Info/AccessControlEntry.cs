@@ -125,5 +125,19 @@ namespace TcmCoreService.Info
 				return mTrustee;
 			}
 		}
+
+        /// <summary>
+        /// Gets <see cref="T:TcmCoreService.Security.Trustee" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="AccessControlEntry" />
+        /// </summary>
+        /// <value>
+        /// <see cref="T:TcmCoreService.Security.Trustee" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="AccessControlEntry" />
+        /// </value>
+        public TcmUri TrusteeUri
+        {
+            get
+            {
+                return mAccessControlEntryData.Trustee.IdRef;
+            }
+        }
 	}
 }

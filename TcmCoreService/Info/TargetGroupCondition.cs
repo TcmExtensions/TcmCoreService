@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TcmCoreService.AudienceManagement;
+using TcmCoreService.Misc;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.Info
@@ -61,5 +62,28 @@ namespace TcmCoreService.Info
 				mTargetGroupConditionData.TargetGroup.IdRef = mTargetGroup.Id;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="T:TcmCoreService.AudienceManagement.TargetGroup" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="TargetGroupCondition" />
+        /// </summary>
+        /// <value>
+        /// <see cref="T:TcmCoreService.AudienceManagement.TargetGroup" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="TargetGroupCondition" />
+        /// </value>
+        public TcmUri TargetGroupUri
+        {
+            get
+            {
+                return mTargetGroupConditionData.TargetGroup.IdRef;
+            }
+            set
+            {
+                mTargetGroup = null;
+
+                if (value == null)
+                    mTargetGroupConditionData.TargetGroup.IdRef = TcmUri.NullUri;
+                else
+                    mTargetGroupConditionData.TargetGroup.IdRef = value;
+            }
+        }
 	}
 }

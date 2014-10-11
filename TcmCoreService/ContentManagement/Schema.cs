@@ -110,7 +110,7 @@ namespace TcmCoreService.ContentManagement
 				if (mAllowedMultimediaTypes == null && mSchemaData.AllowedMultimediaTypes != null)
 					mAllowedMultimediaTypes = mSchemaData.AllowedMultimediaTypes.Select(multimediaType => new MultimediaType(Client, multimediaType.IdRef));
 
-				return mAllowedMultimediaTypes;				
+				return mAllowedMultimediaTypes;
 			}
 			set
 			{
@@ -122,9 +122,37 @@ namespace TcmCoreService.ContentManagement
 						IdRef = multimediaType.Id
 					}).ToArray();
 				else
-					mSchemaData.AllowedMultimediaTypes = null;				
+					mSchemaData.AllowedMultimediaTypes = null;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.ContentManagement.MultimediaType" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Schema" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Schema" /> allowed <see cref="I:System.Collections.Generic.IEnumerable{TcmCoreService.ContentManagement.MultimediaType" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Schema" />
+        /// </value>
+        public IEnumerable<TcmUri> AllowedMultimediaTypesUri
+        {
+            get
+            {
+                return mSchemaData.AllowedMultimediaTypes.Select(multimediaType => new TcmUri(multimediaType.IdRef));
+            }
+            set
+            {
+                mAllowedMultimediaTypes = null;
+
+                if (value != null)
+                {
+                    mSchemaData.AllowedMultimediaTypes = value.Select(multimediaType => new LinkToMultimediaTypeData()
+                    {
+                        IdRef = multimediaType
+                    }).ToArray();
+                }
+                else
+                    mSchemaData.AllowedMultimediaTypes = null;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Schema" />
@@ -152,6 +180,28 @@ namespace TcmCoreService.ContentManagement
             }
         }
 
+        /// <summary>
+        /// Gets or sets the bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Schema" />
+        /// </summary>
+        /// <value>
+        /// Bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Schema" />
+        /// </value>
+        public TcmUri BundleProcessUri
+        {
+            get
+            {
+                return mSchemaData.BundleProcess.IdRef;
+            }
+            set
+            {
+                mBundleProcess = null;
+
+                if (value == null)
+                    mSchemaData.BundleProcess.IdRef = TcmUri.NullUri;
+                else
+                    mSchemaData.BundleProcess.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="Schema" />
@@ -178,6 +228,29 @@ namespace TcmCoreService.ContentManagement
 					mSchemaData.ComponentProcess.IdRef = TcmUri.NullUri;				
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Schema" />
+        /// </summary>
+        /// <value>
+        /// Component <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Schema" />
+        /// </value>
+        public TcmUri ComponentProcessUri
+        {
+            get
+            {
+                return mSchemaData.ComponentProcess.IdRef;
+            }
+            set
+            {
+                mComponentProcess = null;
+
+                if (value == null)
+                    mSchemaData.ComponentProcess.IdRef = TcmUri.NullUri;
+                else
+                    mSchemaData.ComponentProcess.IdRef = value;
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="Schema" /> bundle should be deleted.

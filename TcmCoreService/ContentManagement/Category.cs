@@ -124,6 +124,34 @@ namespace TcmCoreService.ContentManagement
 			}
 		}
 
+        /// <summary>
+        /// Retrieves the list of allowed parent <see cref="T:System.Collections.Generic.IEnumerable{Category}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Category" />
+        /// </summary>
+        /// <value>
+        /// List of allowed parent <see cref="T:System.Collections.Generic.IEnumerable{Category}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Category" />
+        /// </value>
+        public IEnumerable<TcmUri> AllowedParentCategoriesUris
+        {
+            get
+            {
+                return mCategoryData.AllowedParentCategories.Select(category => new TcmUri(category.IdRef));
+            }
+            set
+            {
+                mAllowedParentCategories = null;
+
+                if (value != null)
+                {
+                    mCategoryData.AllowedParentCategories = value.Select(category => new LinkToCategoryData()
+                    {
+                        IdRef = category
+                    }).ToArray();
+                }
+                else
+                    mCategoryData.AllowedParentCategories = null;
+            }
+        }
+
 		/// <summary>
 		/// Gets the <see cref="Category" /> description
 		/// </summary>
@@ -168,6 +196,29 @@ namespace TcmCoreService.ContentManagement
 				mKeywordMetadataSchema = null;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="Category" /> keyword metadata <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Category" /> keyword metadata <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri KeywordMetadataSchemaUri
+        {
+            get
+            {
+                return mCategoryData.KeywordMetadataSchema.IdRef;
+            }
+            set
+            {
+                mKeywordMetadataSchema = null;
+
+                if (value == null)
+                    mCategoryData.KeywordMetadataSchema.IdRef = TcmUri.NullUri;
+                else
+                    mCategoryData.KeywordMetadataSchema.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="Category" /> is a taxonomy root.

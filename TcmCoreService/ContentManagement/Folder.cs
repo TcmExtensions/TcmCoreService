@@ -134,5 +134,28 @@ namespace TcmCoreService.ContentManagement
 					mFolderData.LinkedSchema.IdRef = TcmUri.NullUri;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="Folder" /> linked <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="Folder" /> linked <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri LinkedSchemaUri
+        {
+            get
+            {
+                return mFolderData.LinkedSchema.IdRef;
+            }
+            set
+            {
+                mLinkedSchema = null;
+
+                if (value == null)
+                    mFolderData.LinkedSchema.IdRef = TcmUri.NullUri;
+                else
+                    mFolderData.LinkedSchema.IdRef = value;
+            }
+        }
 	}
 }

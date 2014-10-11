@@ -28,19 +28,19 @@ namespace TcmCoreService.Security
 	/// </summary>
 	public abstract class Trustee : SystemWideObject
 	{
-		private TrusteeData mTrustreeData;
+		private TrusteeData mTrusteeData;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Trustee"/> class.
 		/// </summary>
 		/// <param name="client"><see cref="T:TcmCoreService.Client" /></param>
-		/// <param name="trustreeData"><see cref="T:Tridion.ContentManager.CoreService.Client.TrusteeData" /></param>
-		protected Trustee(Client client, TrusteeData trustreeData): base(client, trustreeData)
+		/// <param name="trusteeData"><see cref="T:Tridion.ContentManager.CoreService.Client.TrusteeData" /></param>
+		protected Trustee(Client client, TrusteeData trusteeData): base(client, trusteeData)
 		{
-			if (trustreeData == null)
+			if (trusteeData == null)
 				throw new ArgumentNullException("trustreeData");
 
-			mTrustreeData = trustreeData;
+            mTrusteeData = trusteeData;
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace TcmCoreService.Security
 			if (trustreeData == null)
 				throw new ArgumentNullException("trustreeData");
 
-			mTrustreeData = trustreeData;
+			mTrusteeData = trustreeData;
 			base.Reload(trustreeData);
 		}
 
@@ -72,5 +72,38 @@ namespace TcmCoreService.Security
 		{
 			Reload(Client.Read<TrusteeData>(this.Id));
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="Trustee" /> description
+        /// </summary>
+        /// <value>
+        /// <see cref="Trustee" /> description
+        /// </value>
+        public String Description
+        {
+            get
+            {
+                return mTrusteeData.Description;
+            }
+            set
+            {
+                mTrusteeData.Description = value;
+                
+            }
+        }
+
+        /// <summary>
+        /// Gets if the <see cref="Trustee" /> is predefined
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the <see cref="Trustee" /> is predefined, otherwise <c>false</c>
+        /// </value>
+        public Boolean IsPredefined
+        {
+            get
+            {
+                return mTrusteeData.IsPredefined.GetValueOrDefault(false);
+            }
+        }
 	}
 }

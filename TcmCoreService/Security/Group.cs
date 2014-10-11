@@ -71,5 +71,19 @@ namespace TcmCoreService.Security
 		{
 			Reload(Client.Read<GroupData>(this.Id));
 		}
+
+        /// <summary>
+        /// Gets the <see cref="Group" /> default group id
+        /// </summary>
+        /// <value>
+        /// Default group id or 0
+        /// </value>
+        public int DefaultGroupId
+        {
+            get
+            {
+                return mGroupData.DefaultGroupId.GetValueOrDefault(0);
+            }
+        }
 	}
 }

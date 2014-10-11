@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TcmCoreService.ContentManagement;
+using TcmCoreService.Misc;
 using Tridion.ContentManager.CoreService.Client;
 
 namespace TcmCoreService.Info
@@ -81,6 +82,29 @@ namespace TcmCoreService.Info
 				mTargetDestinationData.ProtocolSchema.IdRef = mProtocolSchema.Id;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="TargetDestination" /> protocol <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="TargetDestination" /> protocol <see cref="T:TcmCoreService.ContentManagement.Schema" /> <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public TcmUri ProtocolSchemaUri
+        {
+            get
+            {
+                return mTargetDestinationData.ProtocolSchema.IdRef;
+            }
+            set
+            {
+                mProtocolSchema = null;
+
+                if (value == null)
+                    mTargetDestinationData.ProtocolSchema.IdRef = TcmUri.NullUri;
+                else
+                    mTargetDestinationData.ProtocolSchema.IdRef = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets <see cref="TargetDestination" /> title.

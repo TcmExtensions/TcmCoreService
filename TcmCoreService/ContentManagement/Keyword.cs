@@ -196,6 +196,34 @@ namespace TcmCoreService.ContentManagement
 			}
 		}
 
+        /// <summary>
+        /// Retrieves the list of parent <see cref="T:System.Collections.Generic.IEnumerable{Keyword}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Keyword" />
+        /// </summary>
+        /// <value>
+        /// List of parent <see cref="T:System.Collections.Generic.IEnumerable{Keyword}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Keyword" />
+        /// </value>
+        public IEnumerable<TcmUri> ParentKeywordsUris
+        {
+            get
+            {
+                return mKeywordData.ParentKeywords.Select(keyword => new TcmUri(keyword.IdRef));
+            }
+            set
+            {
+                mParentKeywords = null;
+
+                if (value != null)
+                {
+                    mKeywordData.ParentKeywords = value.Select(keyword => new LinkToKeywordData()
+                    {
+                        IdRef = keyword
+                    }).ToArray();
+                }
+                else
+                    mKeywordData.ParentKeywords = null;
+            }
+        }
+
 		/// <summary>
 		/// Retrieves the list of related <see cref="T:System.Collections.Generic.IEnumerable{Keyword}" /> for this <see cref="Keyword" />
 		/// </summary>
@@ -222,5 +250,33 @@ namespace TcmCoreService.ContentManagement
 					mKeywordData.RelatedKeywords = null;
 			}
 		}
+
+        /// <summary>
+        /// Retrieves the list of related <see cref="T:System.Collections.Generic.IEnumerable{Keyword}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Keyword" />
+        /// </summary>
+        /// <value>
+        /// List of parent <see cref="T:System.Collections.Generic.IEnumerable{Keyword}" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="Keyword" />
+        /// </value>
+        public IEnumerable<TcmUri> RelatedKeywordsUris
+        {
+            get
+            {
+                return mKeywordData.RelatedKeywords.Select(keyword => new TcmUri(keyword.IdRef));
+            }
+            set
+            {
+                mRelatedKeywords = null;
+
+                if (value != null)
+                {
+                    mKeywordData.RelatedKeywords = value.Select(keyword => new LinkToKeywordData()
+                    {
+                        IdRef = keyword
+                    }).ToArray();
+                }
+                else
+                    mKeywordData.RelatedKeywords = null;
+            }
+        }
 	}
 }

@@ -124,6 +124,29 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the default <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="StructureGroup" />
+        /// </summary>
+        /// <value>
+        /// Default <see cref="T:TcmCoreService.CommunicationManagement.PageTemplate" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="StructureGroup" />
+        /// </value>
+        public TcmUri DefaultPageTemplateUri
+        {
+            get
+            {
+                return mStructureGroupData.DefaultPageTemplate.IdRef;
+            }
+            set
+            {
+                mDefaultPageTemplate = null;
+
+                if (value == null)
+                    mStructureGroupData.DefaultPageTemplate.IdRef = TcmUri.NullUri;
+                else
+                    mStructureGroupData.DefaultPageTemplate.IdRef = value;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the <see cref="StructureGroup" /> directory.
 		/// </summary>
@@ -224,6 +247,29 @@ namespace TcmCoreService.CommunicationManagement
         }
 
         /// <summary>
+        /// Gets or sets the page bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="StructureGroup" />
+        /// </summary>
+        /// <value>
+        /// Page bundle <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="StructureGroup" />
+        /// </value>
+        public TcmUri PageBundleProcessUri
+        {
+            get
+            {
+                return mStructureGroupData.PageBundleProcess.IdRef;
+            }
+            set
+            {
+                mPageBundleProcess = null;
+
+                if (value == null)
+                    mStructureGroupData.PageBundleProcess.IdRef = TcmUri.NullUri;
+                else
+                    mStructureGroupData.PageBundleProcess.IdRef = value;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the page <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> for this <see cref="StructureGroup" />
         /// </summary>
         /// <value>
@@ -248,5 +294,28 @@ namespace TcmCoreService.CommunicationManagement
 					mStructureGroupData.PageProcess.IdRef = TcmUri.NullUri;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the page <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="StructureGroup" />
+        /// </summary>
+        /// <value>
+        /// Page <see cref="T:TcmCoreService.Workflow.ProcessDefinition" /> <see cref="T:TcmCoreService.Misc.TcmUri" /> for this <see cref="StructureGroup" />
+        /// </value>
+        public TcmUri PageProcessUri
+        {
+            get
+            {
+                return mStructureGroupData.PageProcess.IdRef;
+            }
+            set
+            {
+                mPageProcess = null;
+
+                if (value == null)
+                    mStructureGroupData.PageProcess.IdRef = TcmUri.NullUri;
+                else
+                    mStructureGroupData.PageProcess.IdRef = value;
+            }
+        }
 	}
 }

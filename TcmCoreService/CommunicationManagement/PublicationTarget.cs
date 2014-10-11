@@ -205,6 +205,34 @@ namespace TcmCoreService.CommunicationManagement
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the <see cref="PublicationTarget" /> publications <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="PublicationTarget" /> publications <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public IEnumerable<TcmUri> PublicationsUris
+        {
+            get
+            {
+                return mPublicationTargetData.Publications.Select(publication => new TcmUri(publication.IdRef));
+            }
+            set
+            {
+                mPublications = null;
+
+                if (value != null)
+                {
+                    mPublicationTargetData.Publications = value.Select(publication => new LinkToPublicationData()
+                    {
+                        IdRef = publication
+                    }).ToArray();
+                }
+                else
+                    mPublicationTargetData.Publications = null;
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the <see cref="PublicationTarget" /> target language.
 		/// </summary>
@@ -253,5 +281,33 @@ namespace TcmCoreService.CommunicationManagement
 					mPublicationTargetData.TargetTypes = null;
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the <see cref="PublicationTarget" /> target types <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </summary>
+        /// <value>
+        /// <see cref="PublicationTarget" /> target types <see cref="T:TcmCoreService.Misc.TcmUri" />
+        /// </value>
+        public IEnumerable<TcmUri> TargetTypesUris
+        {
+            get
+            {
+                return mPublicationTargetData.TargetTypes.Select(targetType => new TcmUri(targetType.IdRef));
+            }
+            set
+            {
+                mTargetTypes = null;
+
+                if (value != null)
+                {
+                    mPublicationTargetData.TargetTypes = value.Select(targetType => new LinkToTargetTypeData()
+                    {
+                        IdRef = targetType
+                    }).ToArray();
+                }
+                else
+                    mPublicationTargetData.TargetTypes = null;
+            }
+        }
 	}
 }
